@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
+import { GlobalService } from './services/global.service';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MATE';
+  constructor(private global: GlobalService, private auth:AuthService) {
+    this.global.sideNavActive.next(true)
+  }
+
+  checkLoggedInState() {
+    return this.auth.isLoggedIn
+  }
 }

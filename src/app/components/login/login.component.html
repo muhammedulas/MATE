@@ -1,0 +1,22 @@
+<div class="login-page">
+  <mat-card class="mat-elevation-z12">
+    <mat-card-title style="text-align:center;">Giriş Yap</mat-card-title>
+    <mat-card-content>
+      <div class="form">
+        <mat-form-field>
+          <input matInput placeholder="Kullanıcı Adı" required #username autocomplete="off" (keyup.enter)="login(username.value,password.value)">
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Parola" type="password" required #password (keyup.enter)="login(username.value,password.value)">
+
+          <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="login-button" [disabled]="!username.value || !password.value"
+          (click)="login(username.value,password.value)">
+          Giriş
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
