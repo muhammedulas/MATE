@@ -1,3 +1,91 @@
-<p>
-  profile works!
-</p>
+<mat-card class="mainFrame mat-elevation-z8">
+  <mat-card-title>
+    <h3 class="mt-0">Profil Bilgileri</h3>
+  </mat-card-title>
+  <mat-card-content>
+    <form>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="text-center">
+            <img src="../../../assets/profile.png" style="height:25vh;" alt="">
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-6 mt-2">
+          <mat-form-field>
+            <mat-label>Adı</mat-label>
+            <input type="text" matInput disabled [value]="userInfo.NAME">
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field>
+            <mat-label>Soyadı</mat-label>
+            <input type="text" matInput disabled [value]="userInfo.SURNAME">
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-form-field>
+            <mat-label>Kullanıcı Adı</mat-label>
+            <input type="text" matInput disabled [value]="userInfo.USERNAME">
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <mat-divider></mat-divider>
+    <div class="contact">
+      <h3>İletişim Bilgileri</h3>
+      <form>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>Ülke</mat-label>
+              <input type="text" matInput disabled [value]="userInfo.CONTACT_INFO.COUNTRY">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Şehir</mat-label>
+              <input type="text" matInput disabled [value]="userInfo.CONTACT_INFO.CITY">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>İlçe</mat-label>
+              <input type="text" matInput disabled [value]="userInfo.CONTACT_INFO.DISTRICT">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Posta Kodu</mat-label>
+              <input type="text" matInput disabled [value]="userInfo.CONTACT_INFO.POSTAL_CODE">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <mat-label>
+                Telefon No.
+              </mat-label>
+              <input type="tel" matInput disabled [value]="userInfo.CONTACT_INFO.PHONE">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>E-Posta</mat-label>
+              <input type="text" matInput disabled [value]="userInfo.CONTACT_INFO.MAIL">
+            </mat-form-field>
+          </div>
+        </div>
+        <br>
+        <br>
+
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8 mt-4">
+            <mat-form-field [style.width.%]="100">
+              <mat-label>Açık Adres</mat-label>
+              <textarea name="" matInput id="" cols="30" rows="3" disabled [value]="userInfo.CONTACT_INFO.OPEN_ADRESS"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-md-2"></div>
+
+
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+
+
+</mat-card>

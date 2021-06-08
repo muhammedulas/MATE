@@ -1,16 +1,16 @@
 <mat-toolbar>
-  <button mat-icon-button class="navItem" matTooltip="Menüyü Göster/Gizle">
+  <button mat-icon-button class="navItem" matTooltip="Menüyü Göster/Gizle" (click)="toggleSideNav()">
     <mat-icon>menu</mat-icon>
   </button>
   <span routerLink="/" style="user-select: none; cursor: pointer;">MATE App</span>
   <span class="spacer"></span>
-  <button mat-icon-button class="navItem" matTooltip="Duyurular">
+  <button mat-icon-button class="navItem" matTooltip="Duyurular" (click)="toggleAnnouncementPanel()">
     <mat-icon>campaign</mat-icon>
   </button>
-  <button mat-icon-button class="navItem" matTooltip="Profil">
+  <button mat-icon-button class="navItem" matTooltip="Profil" routerLink="/profile">
     <mat-icon>person</mat-icon>
   </button>
-  <button mat-icon-button class="navItem" matTooltip="Çıkış">
+  <button mat-icon-button class="navItem" matTooltip="Çıkış" (click)="logout()">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>

@@ -9,7 +9,6 @@
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="Parola" type="password" required #password (keyup.enter)="login(username.value,password.value)">
-
           <mat-icon matSuffix>lock</mat-icon>
         </mat-form-field>
         <button mat-raised-button color="primary" class="login-button" [disabled]="!username.value || !password.value"

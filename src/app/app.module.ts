@@ -14,6 +14,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -37,6 +40,14 @@ import { _dashboardComponent } from './components/_dashboard/_dashboard.componen
 import { _tasksComponent } from './components/_tasks/_tasks.component';
 import { _teamsComponent } from './components/_teams/_teams.component';
 import { _todosComponent } from './components/_todos/_todos.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AuthService } from './services/auth.service';
+import { FormsModule } from '@angular/forms';
+import { MemberRolePipe } from './pipes/MemberRole.pipe';
+import { Dialog_addMemberComponent } from './components/admin/teams/dialog_addMember/dialog_addMember.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -49,6 +60,7 @@ import { _todosComponent } from './components/_todos/_todos.component';
     SidenavComponent,
     LandingComponent,
     LoginComponent,
+    ProfileComponent,
     _companyComponent,
     _dashboardComponent,
     _teamsComponent,
@@ -62,7 +74,14 @@ import { _todosComponent } from './components/_todos/_todos.component';
     DepartmentsComponent,
     CompanyComponent,
     TasksComponent,
-    AnnouncementsComponent
+    AnnouncementsComponent,
+    //
+
+    //Dialogs
+    Dialog_addMemberComponent,
+
+    //Pipes
+    MemberRolePipe
     //
   ],
   imports: [
@@ -70,6 +89,7 @@ import { _todosComponent } from './components/_todos/_todos.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
     ToastrModule.forRoot(),
 
     //MatModules
@@ -84,11 +104,18 @@ import { _todosComponent } from './components/_todos/_todos.component';
     MatCardModule,
     MatInputModule,
     MatDividerModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule,
     //
     NgbModule
     
   ],
-  providers: [],
+  providers: [MainComponent, AuthService, TeamsComponent],
+  entryComponents:[Dialog_addMemberComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

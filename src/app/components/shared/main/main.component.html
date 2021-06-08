@@ -2,8 +2,13 @@
 <div class="wrapper">
     <div class="container">
         <router-outlet></router-outlet>
-        <div class="sidenav mat-elevation-z8" cdkDragBoundary=".wrapper" cdkDrag>
-            <button mat-icon-button class="sidenav-close-button" matTooltip="Gizle" matTooltipPosition="above">
+
+
+
+        <!-- Sidenav         -->
+        <div *ngIf="sideNavActive" class="sidenav mat-elevation-z8" cdkDragBoundary=".wrapper" cdkDrag>
+            <button mat-icon-button class="sidenav-close-button" matTooltip="Gizle" matTooltipPosition="above"
+                (click)="toggleSideNav()">
                 <mat-icon>close</mat-icon>
             </button>
             <!--         <div class="sidenav-drag-handle" cdkDragHandle>
@@ -53,6 +58,25 @@
                     </mat-icon>
                 </button>
             </mat-nav-list>
+        </div>
+
+        <!-- Duyuru Paneli     -->
+        <div *ngIf="announcementPanelActive" class="annPanel mat-elevation-z8" cdkDragBoundary=".wrapper" cdkDrag>
+            <button mat-icon-button class="annPanel-close-button" matTooltip="Gizle" matTooltipPosition="above"
+                (click)="toggleAnnouncementPanel()">
+                <mat-icon>close</mat-icon>
+            </button>
+            <div class="annContainer">
+                <h2>Duyurular</h2>
+                <span *ngIf="!announcements[0]">Şu anda hiç duyuru yok</span>
+                <div class="annList" *ngIf="announcements[0]">
+                    <div class="annBox" *ngFor="let ann of announcements" [ngStyle]="{test:ann.ID==1}" (click)="test(ann.CONTENT)">
+                        {{ann.TITLE}}
+                        <div class="spacer"></div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

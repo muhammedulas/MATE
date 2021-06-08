@@ -11,7 +11,8 @@ import { GlobalService } from './services/global.service';
 export class AppComponent {
   title = 'MATE';
   constructor(private global: GlobalService, private auth:AuthService) {
-    this.global.sideNavActive.next(true)
+    this.global.sideNavActive.next(true);
+    this.auth.sessionInfo.next(JSON.parse(localStorage.getItem('session')))
   }
 
   checkLoggedInState() {

@@ -8,6 +8,7 @@ import { TeamsComponent } from './components/admin/teams/teams.component';
 import { UsersComponent } from './components/admin/users/users.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { MainComponent } from './components/shared/main/main.component';
 import { _companyComponent } from './components/_company/_company.component';
 import { _dashboardComponent } from './components/_dashboard/_dashboard.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
       {path:'company', component:_companyComponent},
       {path:'dashboard', component:_dashboardComponent},
       {path:'tasks', component:_tasksComponent},
-      {path:'teams', component: _teamsComponent}
+      {path:'teams', component: _teamsComponent},
+      {path:'profile', component:ProfileComponent}
     ]
   },
   { path: 'login', component: LoginComponent }

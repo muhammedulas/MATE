@@ -1,3 +1,109 @@
-<p>
-  teams works!
-</p>
+<div class="container">
+  <mat-card>
+    <mat-card-title>Ekipler</mat-card-title>
+    <mat-card-content>
+      <mat-accordion class="mt-2" *ngFor="let team of teams; let i = index">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ team.TEAM_NAME}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{team.DEP_NAME}}
+              <div class="spacer"></div>
+              <mat-icon>groups</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row justify-content-between">
+            <mat-card class="uyeler col-8">
+              <!-- <mat-card-title>Üyeler</mat-card-title> -->
+              <mat-card-content>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Üyeler
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      {{team.MEMBER_COUNT}} Üye
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div class="table-responsive">
+
+                    <table mat-table [dataSource]="team.MEMBERS" class="mat-elevation-z8">
+
+                      <ng-container matColumnDef="username">
+                        <th mat-header-cell *matHeaderCellDef> Kullanıcı Adı</th>
+                        <td mat-cell *matCellDef="let member" (click)="select(member)"
+                          [ngClass]="{'active':member == selectedMember}"> {{member.USERNAME}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Adı </th>
+                        <td mat-cell *matCellDef="let member" (click)="select(member)"
+                          [ngClass]="{'active':member == selectedMember}">{{member.NAME}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="surname">
+                        <th mat-header-cell *matHeaderCellDef> Soyadı </th>
+                        <td mat-cell *matCellDef="let member" (click)="select(member)"
+                          [ngClass]="{'active':member == selectedMember}"> {{member.SURNAME}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="role">
+                        <th mat-header-cell *matHeaderCellDef> Rolü </th>
+                        <td mat-cell *matCellDef="let member" (click)="select(member)"
+                          [ngClass]="{'active':member == selectedMember}"> {{member.Role | MemberRole}} </td>
+                      </ng-container>
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                  </div>
+                </mat-expansion-panel>
+              </mat-card-content>
+            </mat-card>
+            <div class="col-1">
+              <div class="row">
+                <button mat-button matTooltip="Üye Ekle" (click)="addMember(i)">
+                  <mat-icon>
+                    person_add
+                  </mat-icon>
+                </button>
+              </div>
+              <div class="row">
+                <button mat-button color="warn" matTooltip="Üyeyi Çıkar" (click)="removeMember(team.TEAMID, i)">
+                  <mat-icon>
+                    person_remove
+                  </mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="row">
+                <mat-form-field>
+                  <input type="text" matInput placeholder="Ekip Adı" autocomplete="off" [(ngModel)]="team.TEAM_NAME">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field>
+                  <input type="text" matInput placeholder="Ekip Açıklaması" autocomplete="off"
+                    [(ngModel)]="team.TEAM_DEF">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-1">
+              <button mat-icon-button matTooltip="Güncelle" (click)="updateTeam(team)">
+                <mat-icon>
+                  sync_alt
+                </mat-icon>
+              </button>
+            </div>
+
+
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-card-actions class="mb-4">
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

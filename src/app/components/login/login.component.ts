@@ -5,6 +5,7 @@ import { MatGridList } from '@angular/material/grid-list';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,9 +15,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthService, private toast: ToastService) { }
+  constructor(private auth: AuthService, private toast: ToastService, private router:Router) { }
 
   ngOnInit() {
+  
   }
 
 

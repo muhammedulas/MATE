@@ -18,7 +18,12 @@ export class AuthService {
     private router: Router
 
   ) {
-    localStorage.setItem('rootUrl', 'https://localhost:44335')
+    localStorage.setItem('rootUrl', 'https://localhost:44335');
+    this.observeSessionInfo().subscribe(session=>{
+      if(session.isAdmin == 'true'){
+        this.isAdmin = true
+      }
+    })
   }
 
   login(username: string, password: string) {
@@ -30,15 +35,24 @@ export class AuthService {
         this.toast.success_top_center('Giriş Başarılı', 3)
         localStorage.setItem('session', JSON.stringify(res))
         localStorage.setItem('token', res.access_token)
+        this.sessionInfo.next(res)
         this.router.navigate(['/'])
       }
     }, err => {
-      this.toast.error_top_center(err.error.error_description, 3)
+      console.log(err)
+      if(err.error.error_description){
+        this.toast.error_top_center(err.error.error_description, 3)
+      }
+      else this.toast.error_top_center(err.message,3)
     })
   }
 
   logout() {
-
+    localStorage.removeItem('session');
+    localStorage.removeItem('token');
+    this.isLoggedIn = false;
+    this.isAdmin = false;
+    this.router.navigate(['/login'])
   }
 
   observeSessionInfo(){

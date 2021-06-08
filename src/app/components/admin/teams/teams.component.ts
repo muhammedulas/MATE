@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { team } from 'src/app/models/team';
+import { teamMember } from 'src/app/models/teamMember';
+import { user } from 'src/app/models/user';
+import { AdminService } from 'src/app/services/admin.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { Dialog_addMemberComponent } from './dialog_addMember/dialog_addMember.component';
 
 @Component({
   selector: 'app-teams',
@@ -6,10 +13,59 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./teams.component.scss']
 })
 export class TeamsComponent implements OnInit {
-
-  constructor() { }
+  public teams: team[] = []
+  public displayedColumns = ["username", "name", "surname", "role"];
+  public selectedMember: teamMember = new teamMember();
+  public memberIndex: number;
+  public dialogRef
+  constructor(private svc: AdminService, private toast: ToastService, private dialog: MatDialog) {
+    this.getTeams();
+  }
 
   ngOnInit() {
+  }
+
+  select(m: teamMember) {
+    this.selectedMember = m;
+  }
+
+  getTeams() {
+    this.svc.getTeams().subscribe(res => {
+      this.teams = res;
+    })
+  }
+
+  removeMember(teamId: number, i: number) {
+    this.svc.removeUser(teamId, this.selectedMember.USERID).subscribe(res => {
+      if (res.OK == true) {
+        this.toast.success_bot_center(res.message, 3)
+        this.teams[i].MEMBER_COUNT--
+        this.teams[i].MEMBERS = this.teams[i].MEMBERS.filter(q => {
+          return q != this.selectedMember
+        })
+      }
+      else {
+        this.toast.error_bot_center(res, 3)
+      }
+    })
+  }
+
+  updateTeam(team: team) {
+    this.svc.updateTeam(team).subscribe(res => {
+      if (res.OK == true) {
+        this.toast.success_bot_center(res.message, 3)
+      }
+      else {
+        this.toast.error_bot_center(res, 3)
+      }
+    })
+  }
+
+  addMember(i: number) {
+    this.dialogRef = this.dialog.open(Dialog_addMemberComponent, {
+      width: '50vw',
+      data: i
+    })
   }
 
 }

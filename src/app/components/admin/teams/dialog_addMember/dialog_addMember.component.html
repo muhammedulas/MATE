@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-10">
+    <div class="table-responsive">
+      <table mat-table [dataSource]="users" class="mat-elevation-z8">
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> Kullanıcı Adı</th>
+          <td mat-cell *matCellDef="let user" (click)="select(user)" [ngClass]="{'active':user == selectedUser}">
+            {{user.USERNAME}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Adı </th>
+          <td mat-cell *matCellDef="let user" (click)="select(user)" [ngClass]="{'active':user == selectedUser}">
+            {{user.NAME}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="surname">
+          <th mat-header-cell *matHeaderCellDef> Soyadı </th>
+          <td mat-cell *matCellDef="let user" (click)="select(user)" [ngClass]="{'active':user == selectedUser}">
+            {{user.SURNAME}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="row action">
+      <mat-form-field [style.width.%]="100">
+        <mat-label>Rol</mat-label>
+        <mat-select>
+          <mat-option (click)="role = 1" [value]="role">Ekip Lideri</mat-option>
+          <mat-option (click)="role = 2" [value]="role">Üye</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row action">
+      <button mat-stroked-button (click)="addUser()">Ekle</button>
+    </div>
+  </div>
+</div>

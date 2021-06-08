@@ -1,0 +1,22 @@
+.container {
+    padding-top: 5%;
+}
+mat-card {
+    width: auto;
+    height: 70vh;
+}
+mat-card-content{
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    display: block;
+  }
+
+.mat-icon {
+    font-size: 150px;
+}
+
+form {
+    width: 100%;
+}
