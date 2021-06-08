@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { company } from '../models/company';
+import { department } from '../models/department';
 import { team } from '../models/team';
 import { tokenResponse } from '../models/tokenResponse';
 import { user } from '../models/user';
@@ -41,7 +42,6 @@ export class AdminService {
     let auth = 'Bearer ' + localStorage.getItem('token')
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json').set('Content-Type', 'application/json')
     let body = JSON.stringify(user)
-    console.log(headers)
     return this.http.put<any>('https://localhost:44335/api/users/' + user.USERID, body, { headers })
   }
 
@@ -63,6 +63,19 @@ export class AdminService {
     return this.http.get<team>('https://localhost:44335/api/teams/' + id + '/?detail=true', { headers })
   }
 
+  createTeam(team: team) {
+    let auth = 'Bearer ' + localStorage.getItem('token')
+    let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json').set('Content-Type', 'application/json')
+    let body = JSON.stringify(team)
+    return this.http.post<any>('https://localhost:44335/api/teams', body, { headers })
+  }
+
+  deleteTeam(teamId){
+    let auth = 'Bearer ' + localStorage.getItem('token')
+    let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
+    return this.http.delete<any>('https://localhost:44335/api/teams/' + teamId , { headers })
+  }
+
   updateTeam(team: team) {
     delete team.MEMBER_COUNT;
     delete team.MEMBERS;
@@ -75,10 +88,14 @@ export class AdminService {
   addMember(tId, uId, Role) {
     let auth = 'Bearer ' + localStorage.getItem('token')
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
-    console.log(headers)
     return this.http.post<any>('https://localhost:44335/api/teams/' + tId + '/addUser(' + uId + ',' + Role + ')', '', { headers })
   }
 
 
+  getDepartments() {
+    let auth = 'Bearer ' + localStorage.getItem('token')
+    let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
+    return this.http.get<department[]>('https://localhost:44335/api/departments', { headers })
+  }
 
 }

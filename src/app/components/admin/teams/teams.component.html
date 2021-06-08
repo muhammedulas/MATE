@@ -1,8 +1,19 @@
 <div class="container">
   <mat-card>
-    <mat-card-title>Ekipler</mat-card-title>
+    <mat-card-title>
+      <div class="row">
+        <div class="col-11 d-flex-justify-content-right">
+          Ekipler
+        </div>
+      </div>
+      <div class="col-1">
+        <button mat-icon-button (click)="addTeam()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-card-title>
     <mat-card-content>
-      <mat-accordion class="mt-2" *ngFor="let team of teams; let i = index">
+      <mat-accordion class="mt-2" *ngFor="let team of teams; let i = index;">
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -29,7 +40,7 @@
                   </mat-expansion-panel-header>
                   <div class="table-responsive">
 
-                    <table mat-table [dataSource]="team.MEMBERS" class="mat-elevation-z8">
+                    <mat-table #memberTable [dataSource]="team.MEMBERS" class="mat-elevation-z8" multiTemplateDataRows>
 
                       <ng-container matColumnDef="username">
                         <th mat-header-cell *matHeaderCellDef> Kullanıcı Adı</th>
@@ -56,7 +67,7 @@
 
                       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
+                    </mat-table>
                   </div>
                 </mat-expansion-panel>
               </mat-card-content>
@@ -65,7 +76,7 @@
               <div class="row">
                 <button mat-button matTooltip="Üye Ekle" (click)="addMember(i)">
                   <mat-icon>
-                    person_add
+                    person_add_alt_1
                   </mat-icon>
                 </button>
               </div>
@@ -91,14 +102,18 @@
               </div>
             </div>
             <div class="col-1">
-              <button mat-icon-button matTooltip="Güncelle" (click)="updateTeam(team)">
+              <button mat-icon-button color="primary" matTooltip="Güncelle" (click)="updateTeam(team)">
                 <mat-icon>
                   sync_alt
                 </mat-icon>
               </button>
+              <br>
+              <button mat-icon-button color="warn" matTooltip="Sil" (click)="deleteTeam(team, i)">
+                <mat-icon>
+                  delete_outline
+                </mat-icon>
+              </button>
             </div>
-
-
           </div>
         </mat-expansion-panel>
       </mat-accordion>

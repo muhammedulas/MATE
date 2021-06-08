@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Ekip Oluştur</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input type="text" matInput autocomplete="off" placeholder="Ekip Adı" [(ngModel)]="team.TEAM_NAME">
+  </mat-form-field>
+  &nbsp;
+  <mat-form-field>
+    <input type="text" matInput autocomplete="off" placeholder="Ekip Tanımı" [(ngModel)]="team.TEAM_DEF">
+  </mat-form-field>
+</div>
+<br>
+<mat-form-field>
+<mat-select placeholder="Departman" >
+  <mat-option *ngFor="let dep of departments" (click)="select(dep)" [value]="dep.DEPARTMENT_NAME">{{dep.DEPARTMENT_NAME}}</mat-option>
+</mat-select>
+</mat-form-field>
+<div mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]>Vazgeç</button>
+  <button mat-button [mat-dialog-close] cdkFocusInitial (click)="create()">Oluştur</button>
+</div>

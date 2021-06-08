@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 import { team } from 'src/app/models/team';
 import { teamMember } from 'src/app/models/teamMember';
 import { user } from 'src/app/models/user';
 import { AdminService } from 'src/app/services/admin.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Dialog_addMemberComponent } from './dialog_addMember/dialog_addMember.component';
+import { Dialog_addTeamComponent } from './dialog_addTeam/dialog_addTeam.component';
 
 @Component({
   selector: 'app-teams',
@@ -13,16 +15,31 @@ import { Dialog_addMemberComponent } from './dialog_addMember/dialog_addMember.c
   styleUrls: ['./teams.component.scss']
 })
 export class TeamsComponent implements OnInit {
+  @ViewChild(MatTable) memberTable: MatTable<any>
   public teams: team[] = []
   public displayedColumns = ["username", "name", "surname", "role"];
   public selectedMember: teamMember = new teamMember();
   public memberIndex: number;
-  public dialogRef
-  constructor(private svc: AdminService, private toast: ToastService, private dialog: MatDialog) {
+  public memberDialogRef;
+  public teamDialogRef;
+
+  constructor(
+    private svc: AdminService,
+    private toast: ToastService,
+    private dialog: MatDialog,
+    private changeDetectorRefs: ChangeDetectorRef,
+
+  ) {
     this.getTeams();
+
   }
 
+
   ngOnInit() {
+  }
+
+  reRender() {
+    this.memberTable.renderRows()
   }
 
   select(m: teamMember) {
@@ -32,6 +49,7 @@ export class TeamsComponent implements OnInit {
   getTeams() {
     this.svc.getTeams().subscribe(res => {
       this.teams = res;
+      console.log(this.teams)
     })
   }
 
@@ -50,6 +68,22 @@ export class TeamsComponent implements OnInit {
     })
   }
 
+  addTeam(){
+    this.teamDialogRef = this.dialog.open(Dialog_addTeamComponent, {
+
+    })
+  }
+
+  deleteTeam(team:team, i){
+    this.svc.deleteTeam(team.TEAMID).subscribe(res=>{
+      if(res.OK == true){
+        this.teams = this.teams.filter(q=>{
+          return q != team
+        })
+      }
+    })
+  }
+
   updateTeam(team: team) {
     this.svc.updateTeam(team).subscribe(res => {
       if (res.OK == true) {
@@ -62,10 +96,14 @@ export class TeamsComponent implements OnInit {
   }
 
   addMember(i: number) {
-    this.dialogRef = this.dialog.open(Dialog_addMemberComponent, {
+    this.memberDialogRef = this.dialog.open(Dialog_addMemberComponent, {
       width: '50vw',
       data: i
     })
+  }
+
+  trackChanges(index:number, team){
+    return team.TEAMID
   }
 
 }

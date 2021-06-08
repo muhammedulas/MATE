@@ -34,7 +34,6 @@ export class Dialog_addMemberComponent implements OnInit {
   }
 
   addUser() {
-    console.log(this.data)
     let teamId = this.parent.teams[this.data].TEAMID
     let userId = this.selectedUser.USERID
     this.svc.addMember(teamId, userId, this.role).subscribe(res => {
@@ -46,7 +45,8 @@ export class Dialog_addMemberComponent implements OnInit {
           NAME: this.selectedUser.NAME,
           SURNAME: this.selectedUser.SURNAME
         }
-        this.parent.teams[this.data].MEMBERS.splice(this.parent.teams[this.data].MEMBERS.length, 0, usr)
+        this.parent.teams[this.data].MEMBERS.push(usr)
+        this.parent.reRender()
         this.toast.success_bot_center(res.message, 3)
       }
     }, err => {

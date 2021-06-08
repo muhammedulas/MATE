@@ -6,8 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {MatListModule} from '@angular/material/list';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatListModule } from '@angular/material/list';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -17,6 +17,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -48,6 +49,7 @@ import { Dialog_addMemberComponent } from './components/admin/teams/dialog_addMe
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { Dialog_addTeamComponent } from './components/admin/teams/dialog_addTeam/dialog_addTeam.component';
 
 
 
@@ -79,7 +81,7 @@ import { MatSelectModule } from '@angular/material/select';
 
     //Dialogs
     Dialog_addMemberComponent,
-
+    Dialog_addTeamComponent,
     //Pipes
     MemberRolePipe
     //
@@ -110,12 +112,13 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,
+    MatAutocompleteModule,
     //
     NgbModule
-    
+
   ],
   providers: [MainComponent, AuthService, TeamsComponent],
-  entryComponents:[Dialog_addMemberComponent],
+  entryComponents: [Dialog_addMemberComponent, Dialog_addTeamComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
