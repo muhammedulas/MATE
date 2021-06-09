@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
+import { AnnouncementsComponent } from './components/admin/announcements/announcements.component';
 import { CompanyComponent } from './components/admin/company/company.component';
 import { DepartmentsComponent } from './components/admin/departments/departments.component';
 import { TasksComponent } from './components/admin/tasks/tasks.component';
@@ -20,7 +21,14 @@ const routes: Routes = [
   {
     path: '', component: MainComponent, children: [
       { path: '', component: LandingComponent },
-      { path: 'admin', component: AdminComponent },
+      { path: 'admin', component: AdminComponent, children:[
+        {path:'teams', component:TeamsComponent},
+        {path:'company', component:CompanyComponent},
+        {path:'departments', component:DepartmentsComponent},
+        {path:'users', component:UsersComponent},
+        {path:'tasks', component:TasksComponent},
+        {path:'announcements', component:AnnouncementsComponent}
+      ]},
       {path:'todos', component:_todosComponent},
       {path:'company', component:_companyComponent},
       {path:'dashboard', component:_dashboardComponent},

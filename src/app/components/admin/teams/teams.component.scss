@@ -6,7 +6,7 @@ mat-card {
     height: 70vh;
 }
 mat-card-content {
-    height: 100%;
+    height: 88%;
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -22,7 +22,7 @@ mat-card.uyeler {
     width: 50vw;
 }
 
-mat-table{
+mat-table {
     width: 100%;
 }
 .table-responsive {
@@ -40,12 +40,12 @@ mat-table{
         border-collapse: collapse;
         margin: 0px;
     }
-    .mat-row{
-      height: 6.5vh;
+    .mat-row {
+        height: 6.5vh;
     }
-    .mat-row:hover{
-      background-color: #ebebeb;
-    };
+    .mat-row:hover {
+        background-color: #ebebeb;
+    }
     .mat-header-row {
         display: table-row;
     }
@@ -61,8 +61,12 @@ mat-table{
         overflow: hidden;
         vertical-align: middle;
     }
-  }
+}
 
-  .active{
-      background-color: #ebebeb;
-  }
+.active {
+    background-color: #ebebeb;
+}
+
+.mat-expansion-panel-header-title {
+    width: 20%;
+}

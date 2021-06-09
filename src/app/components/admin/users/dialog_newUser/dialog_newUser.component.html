@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>Kullanıcı Oluştur</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-card>
+    <mat-card-content>
+      <div class="row justify-content-between">
+        <div class="col-4">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Kullanıcı Adı" autocomplete="off" [(ngModel)]="newUser.USERNAME">
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Adı" autocomplete="off" [(ngModel)]="newUser.NAME">
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Soyadı" autocomplete="off" [(ngModel)]="newUser.SURNAME">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-4">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Ülke" autocomplete="off" [(ngModel)]="newUser.CONTACT_INFO.COUNTRY">
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Şehir" autocomplete="off" [(ngModel)]="newUser.CONTACT_INFO.CITY">
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field>
+            <input type="text" matInput placeholder="E-Posta" autocomplete="off" [(ngModel)]="newUser.CONTACT_INFO.MAIL">
+          </mat-form-field>
+        </div>
+        
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-4">
+          <mat-form-field>
+            <input type="text" matInput placeholder="İlçe" autocomplete="off" [(ngModel)]="newUser.CONTACT_INFO.DISTRICT">
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Posta Kodu" autocomplete="off" [(ngModel)]="newUser.CONTACT_INFO.POSTAL_CODE">
+          </mat-form-field>
+        </div>
+        <div class="col-4">
+          <mat-form-field>
+            <input matInput type="text" matInput placeholder="Telefon" autocomplete="off" [(ngModel)]="newUser.CONTACT_INFO.PHONE">
+          </mat-form-field>
+        </div>
+        
+      </div>
+      <div class="row justify-content-start p-3">
+        <div class=" col-9 d-flex justify-content-start">
+          <mat-form-field [style.width.%]="100">
+            <textarea name="" matInput autocomplete="off" [(ngModel)]="newUser.CONTACT_INFO.OPEN_ADRESS" placeholder="Açık Adres"  id="" cols="30" rows="3"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Vazgeç</button>
+  <button mat-button [mat-dialog-close] color="primary" cdkFocusInitial (click)="create()">Oluştur</button>
+</mat-dialog-actions>

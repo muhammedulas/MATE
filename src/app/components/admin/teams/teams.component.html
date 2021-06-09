@@ -11,9 +11,11 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
+      <mat-divider></mat-divider>
     </mat-card-title>
+
     <mat-card-content>
-      <mat-accordion class="mt-2" *ngFor="let team of teams; let i = index;">
+      <mat-accordion class="mt-2" #accordion  *ngFor="let team of teams; let i = index;">
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>

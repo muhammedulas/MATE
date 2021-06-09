@@ -32,5 +32,12 @@
     width: 80%;
     margin: 20px auto;
   }
-  
+
+  @media screen and (max-width: 600px) {
+    mat-card {
+      width: 80%;
+      margin: 10% auto;
+      border-radius: 8px;
+    }
+  }
   

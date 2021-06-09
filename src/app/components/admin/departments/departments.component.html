@@ -1,11 +1,120 @@
 <div class="container">
   <mat-card>
-    <mat-card-title>Departmanlar</mat-card-title>
+    <mat-card-title>
+      <div class="row">
+        <div class="col-11 d-flex-justify-content-right">
+          Departmanlar
+        </div>
+      </div>
+      <div class="col-7">
+        <div class="row">
+          <button mat-icon-button matTooltip="Departman Oluştur" (click)="createMode = !createMode">
+            <mat-icon>add</mat-icon>
+          </button>
+          <div *ngIf="createMode">
+            <mat-form-field>
+              <input type="text" matInput [(ngModel)]="newDepartment.DEPARTMENT_NAME" autocomplete="off" placeholder="Departman Adı">
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field>
+              <input type="text" matInput [(ngModel)]="newDepartment.DEPARTMENT_DEF" autocomplete="off" placeholder="Departman Tanımı">
+            </mat-form-field>
+            &nbsp;
+            <button mat-icon-button color="primary" matTooltip="Oluştur" (click)="createDepartment()">
+              <mat-icon>
+                check
+              </mat-icon>
+            </button>
+            <button mat-icon-button color="warn" matTooltip="Vazgeç" (click)="createMode = !createMode">
+              <mat-icon>
+                close
+              </mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-title>
     <mat-card-content>
+      <mat-accordion class="mt-2">
+        <mat-expansion-panel *ngFor="let dep of departments; let i = index">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{dep.DEPARTMENT_NAME}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{dep.DEPARTMENT_DEF}}
+              <div class="spacer"></div>
+              <mat-icon>apartment</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row justify-content-between">
+            <mat-card class="Ekipler col-8">
+              <mat-card-title>
+                Departmana Bağlı Ekipler
+              </mat-card-title>
+              <mat-card-content>
+                <div class="table-responsive">
 
-      <mat-card-actions class="mb-4">
-       
-      </mat-card-actions>
+                  <mat-table #teamsTable [dataSource]="departments[i].TEAMS" class="mat-elevation-z8"
+                    multiTemplateDataRows>
+
+                    <ng-container matColumnDef="teamName">
+                      <th mat-header-cell *matHeaderCellDef>Ekip Adı</th>
+                      <td mat-cell *matCellDef="let team"> {{team.TEAM_NAME}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="teamDef">
+                      <th mat-header-cell *matHeaderCellDef> Ekip Açıklaması </th>
+                      <td mat-cell *matCellDef="let team">{{team.TEAM_DEF}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="memberCount">
+                      <th mat-header-cell *matHeaderCellDef> Üye Sayısı </th>
+                      <td mat-cell *matCellDef="let team"> {{team.MEMBER_COUNT}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </mat-table>
+                </div>
+              </mat-card-content>
+            </mat-card>
+            <div class="col-1">
+              <div class="row">
+
+              </div>
+              <div class="row">
+
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="row">
+                <mat-form-field>
+                  <input type="text" matInput placeholder="Departman Adı" autocomplete="off" [(ngModel)]="dep.DEPARTMENT_NAME">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field>
+                  <input type="text" matInput placeholder="Departman Açıklaması" autocomplete="off"  [(ngModel)]="dep.DEPARTMENT_DEF">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-1">
+              <button mat-icon-button color="primary" matTooltip="Güncelle" (click)="updateDepartment(dep)">
+                <mat-icon>
+                  sync_alt
+                </mat-icon>
+              </button>
+              <br>
+              <button mat-icon-button color="warn" matTooltip="Sil" (click)="deleteDepartment(dep)">
+                <mat-icon>
+                  delete_outline
+                </mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     </mat-card-content>
   </mat-card>
 </div>

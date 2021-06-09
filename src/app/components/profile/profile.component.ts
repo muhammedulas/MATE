@@ -19,7 +19,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.svc.getOwnInfo().subscribe(res=>{
       this.userInfo = res
-      console.log(res)
     })
   }
 

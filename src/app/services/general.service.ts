@@ -18,9 +18,7 @@ export class GeneralService {
   }
 
   getOwnInfo() {
-    console.log(this.session.userId)
     let auth = 'Bearer ' + this.session.access_token;
-    console.log(auth)
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
     return this.http.get<user>('https://localhost:44335/api/getOwnUserInfo/' + this.session.userId, { headers })
   }
@@ -35,6 +33,12 @@ export class GeneralService {
     let auth = 'Bearer ' + this.session.access_token;
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
     return this.http.get<company>('https://localhost:44335/api/companies/1', { headers })
+  }
+
+  setPassword(pw, id) {
+    let auth = 'Bearer ' + this.session.access_token;
+    let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json').set('Content-Type', 'application/json')
+    return this.http.get<any>('https://localhost:44335/api/setPassword?id=' + id + '&password=' + pw, { headers })
   }
 
 }

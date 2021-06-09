@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Iconfirmation } from 'src/app/app.component';
 import { contactInfo } from 'src/app/models/contactInfo';
 import { user } from 'src/app/models/user';
 import { AdminService } from 'src/app/services/admin.service';
+import { GlobalService } from 'src/app/services/global.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { Dialog_confirmationComponent } from '../../commonDialogs/dialog_confirmation/dialog_confirmation.component';
+import { Dialog_newUserComponent } from './dialog_newUser/dialog_newUser.component';
+import { Dialog_passwordComponent } from './dialog_password/dialog_password.component';
 
 @Component({
   selector: 'app-users',
@@ -13,8 +19,12 @@ export class UsersComponent implements OnInit {
   public users: user[] = [];
   public selected: number = 0;
   public temp: user = new user();
+  public showModal: boolean = false;
+  deleteDialogRef: MatDialogRef<any>;
+  newUserDialogRef: MatDialogRef<any>;
+  passDialogRef: MatDialogRef<any>;
 
-  constructor(private svc: AdminService, private toast: ToastService) { }
+  constructor(private svc: AdminService, private toast: ToastService, private dialog: MatDialog, private global: GlobalService) { }
 
   ngOnInit() {
     this.getUsers()
@@ -52,11 +62,36 @@ export class UsersComponent implements OnInit {
   update(u) {
     this.svc.updateUser(u).subscribe(res => {
       if (res.OK == true) {
+        console.log(res)
         this.toast.success_bot_center(res.message, 3)
       }
       else {
         this.toast.error_bot_center(res.message, 3)
       }
+    })
+  }
+
+  deleteUser(user: user) {
+    let dialogData: Iconfirmation = {
+      title: 'Silme İşlemini Onayla',
+      themeColor: 'warn',
+      description: user.USERNAME + ' kullanıcısı silinecektir. Onaylıyor musunuz?',
+      action: 'delete',
+      id: user.USERID,
+      actionButtonColor:'warn'
+    }
+    this.deleteDialogRef = this.dialog.open(Dialog_confirmationComponent, {
+      data: dialogData
+    })
+  }
+
+  addUser() {
+    this.dialog.open(Dialog_newUserComponent)
+  }
+
+  setPassword(id) {
+    this.passDialogRef = this.dialog.open(Dialog_passwordComponent, {
+      data: id
     })
   }
 

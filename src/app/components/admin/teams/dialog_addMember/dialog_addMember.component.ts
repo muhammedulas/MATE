@@ -3,8 +3,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { teamMember } from 'src/app/models/teamMember';
 import { user } from 'src/app/models/user';
 import { AdminService } from 'src/app/services/admin.service';
+import { GlobalService } from 'src/app/services/global.service';
 import { ToastService } from 'src/app/services/toast.service';
-import { TeamsComponent } from '../teams.component';
+import { idIndex, TeamsComponent } from '../teams.component';
 
 @Component({
   selector: 'app-dialog_addMember',
@@ -18,9 +19,9 @@ export class Dialog_addMemberComponent implements OnInit {
   public role: number = 1;
   public displayedColumns = ["username", "name", "surname"]
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: number,
+    @Inject(MAT_DIALOG_DATA) public data: idIndex,
     private svc: AdminService,
-    private parent: TeamsComponent,
+    private global:GlobalService,
     private toast: ToastService
   ) { }
 
@@ -34,9 +35,8 @@ export class Dialog_addMemberComponent implements OnInit {
   }
 
   addUser() {
-    let teamId = this.parent.teams[this.data].TEAMID
     let userId = this.selectedUser.USERID
-    this.svc.addMember(teamId, userId, this.role).subscribe(res => {
+    this.svc.addMember(this.data.id, userId, this.role).subscribe(res => {
       if (res.OK == true) {
         let usr: teamMember = {
           USERID: this.selectedUser.USERID,
@@ -45,8 +45,8 @@ export class Dialog_addMemberComponent implements OnInit {
           NAME: this.selectedUser.NAME,
           SURNAME: this.selectedUser.SURNAME
         }
-        this.parent.teams[this.data].MEMBERS.push(usr)
-        this.parent.reRender()
+        
+        this.global.reRouteAdmin()
         this.toast.success_bot_center(res.message, 3)
       }
     }, err => {

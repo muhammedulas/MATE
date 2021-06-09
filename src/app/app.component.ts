@@ -2,6 +2,16 @@ import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { GlobalService } from './services/global.service';
 
+export interface Iconfirmation{
+  title:string;
+  description:string;
+  actionButtonColor?:string;
+  themeColor?:string;
+  action:string;
+  additional?:string;
+  id?:number;
+  index?:number;
+}
 
 @Component({
   selector: 'app-root',

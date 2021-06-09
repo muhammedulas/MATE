@@ -1,11 +1,22 @@
 .container {
     padding-top: 5%;
-}
-mat-card {
+  }
+  mat-card {
     width: auto;
     height: 70vh;
-}
+  }
+  mat-card-content {
+    height: 88%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: block;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
 
-.mat-icon {
-    font-size: 150px;
+  .mat-expansion-panel-header-title{
+    width: 20%;
 }

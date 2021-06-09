@@ -1,6 +1,18 @@
 <div class="container">
   <mat-card>
-    <mat-card-title>Kullanıcılar</mat-card-title>
+    <mat-card-title>
+      <div class="row">
+        <div class="col-11 d-flex-justify-content-right">
+          Kullanıcılar
+        </div>
+      </div>
+      <div class="col-1">
+        <button mat-icon-button (click)="addUser()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-title>
     <mat-card-content>
       <mat-accordion class="mt-2">
         <mat-expansion-panel *ngFor="let user of users; let i = index" (click)="select(user)">
@@ -32,17 +44,34 @@
             </div>
             <div class="col-md-1 offset-md-2">
               <div class="spacer"></div>
-              <button mat-icon-button color="primary" matTooltip="Güncelle" (click)="update(user)">
-                <mat-icon>
-                  sync_alt
-                </mat-icon>
-              </button>
+              <div class="row">
+                <div class="col">
+                  <button mat-icon-button color="primary" matTooltip="Güncelle" (click)="update(user)">
+                    <mat-icon>
+                      sync_alt
+                    </mat-icon>
+                  </button>
+                  <br>
+                  <button mat-icon-button color="warn" matTooltip="Sil" (click)="deleteUser(user)">
+                    <mat-icon>
+                      delete_outline
+                    </mat-icon>
+                  </button>
+                  <br>
+                  <button mat-icon-button color="accent" matTooltip="Parola belirle" (click)="setPassword(user.USERID)">
+                    <mat-icon>
+                      password
+                    </mat-icon>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row justify-content-between">
             <div class="col-3">
               <mat-form-field>
-                <input type="text" matInput placeholder="Ülke" autocomplete="off" [(ngModel)]="user.CONTACT_INFO.COUNTRY">
+                <input type="text" matInput placeholder="Ülke" autocomplete="off"
+                  [(ngModel)]="user.CONTACT_INFO.COUNTRY">
               </mat-form-field>
             </div>
             <div class="col-3">
@@ -52,7 +81,8 @@
             </div>
             <div class="col-3">
               <mat-form-field>
-                <input type="text" matInput placeholder="E-Posta" autocomplete="off" [(ngModel)]="user.CONTACT_INFO.MAIL">
+                <input type="text" matInput placeholder="E-Posta" autocomplete="off"
+                  [(ngModel)]="user.CONTACT_INFO.MAIL">
               </mat-form-field>
             </div>
             <div class="col-3"></div>
@@ -60,17 +90,20 @@
           <div class="row justify-content-between">
             <div class="col-3">
               <mat-form-field>
-                <input type="text" matInput placeholder="İlçe" autocomplete="off" [(ngModel)]="user.CONTACT_INFO.DISTRICT">
+                <input type="text" matInput placeholder="İlçe" autocomplete="off"
+                  [(ngModel)]="user.CONTACT_INFO.DISTRICT">
               </mat-form-field>
             </div>
             <div class="col-3">
               <mat-form-field>
-                <input type="text" matInput placeholder="Posta Kodu" autocomplete="off" [(ngModel)]="user.CONTACT_INFO.POSTAL_CODE">
+                <input type="text" matInput placeholder="Posta Kodu" autocomplete="off"
+                  [(ngModel)]="user.CONTACT_INFO.POSTAL_CODE">
               </mat-form-field>
             </div>
             <div class="col-3">
               <mat-form-field>
-                <input matInput type="text" matInput placeholder="Telefon" autocomplete="off" [(ngModel)]="user.CONTACT_INFO.PHONE">
+                <input matInput type="text" matInput placeholder="Telefon" autocomplete="off"
+                  [(ngModel)]="user.CONTACT_INFO.PHONE">
               </mat-form-field>
             </div>
             <div class="col-3"></div>
@@ -78,7 +111,8 @@
           <div class="row justify-content-start p-3">
             <div class=" col-9 d-flex justify-content-start">
               <mat-form-field [style.width.%]="100">
-                <textarea name="" matInput autocomplete="off" [(ngModel)]="user.CONTACT_INFO.OPEN_ADRESS" placeholder="Açık Adres"  id="" cols="30" rows="3"></textarea>
+                <textarea name="" matInput autocomplete="off" [(ngModel)]="user.CONTACT_INFO.OPEN_ADRESS"
+                  placeholder="Açık Adres" id="" cols="30" rows="3"></textarea>
               </mat-form-field>
             </div>
           </div>

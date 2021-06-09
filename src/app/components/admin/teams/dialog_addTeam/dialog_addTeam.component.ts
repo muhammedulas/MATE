@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { department } from 'src/app/models/department';
 import { team } from 'src/app/models/team';
 import { AdminService } from 'src/app/services/admin.service';
+import { GlobalService } from 'src/app/services/global.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { TeamsComponent } from '../teams.component';
 
@@ -16,7 +17,7 @@ export class Dialog_addTeamComponent implements OnInit {
   public selectedDep: department = new department();
   constructor(
     private svc: AdminService,
-    private parent: TeamsComponent,
+    private global:GlobalService,
     private toast: ToastService
   ) {
     this.svc.getDepartments().subscribe(res => {
@@ -35,8 +36,7 @@ export class Dialog_addTeamComponent implements OnInit {
     this.team.DEPREF = this.selectedDep.DEPID
     this.team.DEP_NAME = this.selectedDep.DEPARTMENT_NAME
     this.svc.createTeam(this.team).subscribe(res => {
-      this.parent.teams.push(this.team)
-      this.parent.getTeams();
+      this.global.reRouteAdmin();
       this.toast.success_bot_center(res, 3)
     }, err => {
       this.toast.error_bot_center(err.error, 3)

@@ -11,6 +11,7 @@ import { ToastService } from './toast.service';
 export class AuthService {
   public isLoggedIn: boolean = false;
   public isAdmin: boolean = false;
+  public userId: number = 0;
   public sessionInfo = new Subject<tokenResponse>();
   constructor(
     private http: HttpClient,
@@ -19,9 +20,12 @@ export class AuthService {
 
   ) {
     localStorage.setItem('rootUrl', 'https://localhost:44335');
-    this.observeSessionInfo().subscribe(session=>{
-      if(session.isAdmin == 'true'){
-        this.isAdmin = true
+    this.observeSessionInfo().subscribe(session => {
+      if(session){
+        if (session.isAdmin == 'true') {
+          this.isAdmin = true
+          this.userId = parseInt(session.userId)
+        }
       }
     })
   }
@@ -40,10 +44,10 @@ export class AuthService {
       }
     }, err => {
       console.log(err)
-      if(err.error.error_description){
+      if (err.error.error_description) {
         this.toast.error_top_center(err.error.error_description, 3)
       }
-      else this.toast.error_top_center(err.message,3)
+      else this.toast.error_top_center(err.message, 3)
     })
   }
 
@@ -55,7 +59,7 @@ export class AuthService {
     this.router.navigate(['/login'])
   }
 
-  observeSessionInfo(){
+  observeSessionInfo() {
     return this.sessionInfo.asObservable()
   }
 

@@ -18,6 +18,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -47,9 +48,13 @@ import { FormsModule } from '@angular/forms';
 import { MemberRolePipe } from './pipes/MemberRole.pipe';
 import { Dialog_addMemberComponent } from './components/admin/teams/dialog_addMember/dialog_addMember.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatOptionModule } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule, MatOptionModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { Dialog_addTeamComponent } from './components/admin/teams/dialog_addTeam/dialog_addTeam.component';
+import { Dialog_confirmationComponent } from './components/commonDialogs/dialog_confirmation/dialog_confirmation.component';
+import { Dialog_newUserComponent } from './components/admin/users/dialog_newUser/dialog_newUser.component';
+import { Dialog_passwordComponent } from './components/admin/users/dialog_password/dialog_password.component';
+import { Diaog_newDepartmentComponent } from './components/admin/departments/diaog_newDepartment/diaog_newDepartment.component';
 
 
 
@@ -82,6 +87,10 @@ import { Dialog_addTeamComponent } from './components/admin/teams/dialog_addTeam
     //Dialogs
     Dialog_addMemberComponent,
     Dialog_addTeamComponent,
+    Dialog_confirmationComponent,
+    Dialog_newUserComponent,
+    Dialog_passwordComponent,
+    Diaog_newDepartmentComponent,
     //Pipes
     MemberRolePipe
     //
@@ -113,12 +122,26 @@ import { Dialog_addTeamComponent } from './components/admin/teams/dialog_addTeam
     MatOptionModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     //
     NgbModule
 
   ],
-  providers: [MainComponent, AuthService, TeamsComponent],
-  entryComponents: [Dialog_addMemberComponent, Dialog_addTeamComponent],
+  providers: [MainComponent, 
+    AuthService, TeamsComponent, 
+    AdminComponent, 
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+  ],
+  
+  entryComponents: [
+    Dialog_addMemberComponent,
+    Dialog_addTeamComponent, 
+    Dialog_confirmationComponent, 
+    Dialog_newUserComponent,
+    Dialog_passwordComponent
+  ],
+    
   bootstrap: [AppComponent]
 })
 export class AppModule { }

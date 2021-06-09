@@ -1,10 +1,115 @@
 <div class="container">
   <mat-card>
-    <mat-card-title>Duyurular</mat-card-title>
+    <mat-card-title>
+      <div class="row">
+        <div class="col-11 d-flex-justify-content-right">
+          Duyurular
+        </div>
+      </div>
+      <div class="col-1">
+        <button mat-icon-button (click)="createAnnouncement()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-title>
     <mat-card-content>
-
+      <mat-accordion class="mt-2">
+        <mat-expansion-panel *ngFor="let ann of announcements" [expanded]="ann.isNew">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="duyuru">
+              {{ann.TITLE}}
+            </mat-panel-title>
+            <mat-panel-description>
+              <span *ngIf="ann.TEAM_ID > 0">Ekibe Yönelik</span>
+              <span *ngIf="ann.DEPARTMENT_ID > 0">Departmana Yönelik</span>
+              <span *ngIf="ann.COMPANY_ID > 0">Genel</span>
+              <div class="spacer"></div>
+              <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row justify-content-between">
+            <div class="col-3">
+              <mat-form-field [style.width.%]="100">
+                <input type="text" matInput placeholder="Duyuru Başlığı" autocomplete="off" [(ngModel)]="ann.TITLE">
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field [style.width.%]="100">
+                <mat-label>Tarih Aralığını Seçin</mat-label>
+                <mat-date-range-input [(value)]="selectedDate" [rangePicker]="picker" >
+                  <input [(ngModel)]="ann.CREATED_AT" matStartDate placeholder="Yayınlanma Tarihi">
+                  <input [(ngModel)]="ann.DEADLINE" matEndDate placeholder="Son Tarih">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field [style.width.%]="100">
+                <mat-label>Hedef</mat-label>
+                <mat-select #scope [(value)]="ann.scope" [disabled]="!ann.isNew">
+                  <mat-option value=0>Herkes</mat-option>
+                  <mat-option value=1>Departmanlar</mat-option>
+                  <mat-option value=2>Ekipler</mat-option>
+                </mat-select>
+                <mat-hint align="end">Duyuruyu Kimlerin Göreceğini Seç</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-md-1 offset-md-2">
+              <div class="spacer"></div>
+              <div class="row">
+                <div class="col">
+                  <button mat-icon-button color="primary" matTooltip="Güncelle" *ngIf="!ann.isNew"
+                    (click)="update(ann)">
+                    <mat-icon>
+                      sync_alt
+                    </mat-icon>
+                  </button>
+                  <button mat-icon-button color="primary" matTooltip="Oluştur" *ngIf="ann.isNew" (click)="send()">
+                    <mat-icon>
+                      done
+                    </mat-icon>
+                  </button>
+                  <br>
+                  <button mat-icon-button color="warn" matTooltip="Sil" *ngIf="!ann.isNew" (click)="delete(ann)">
+                    <mat-icon>
+                      delete_outline
+                    </mat-icon>
+                  </button>
+                  <button mat-icon-button color="warn" matTooltip="Vazgeç" *ngIf="ann.isNew"
+                    (click)="announcements.shift()">
+                    <mat-icon>
+                      close
+                    </mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-start align-items-end p-3">
+            <div class=" col-9 d-flex justify-content-start">
+              <mat-form-field [style.width.%]="70">
+                <textarea name="" matInput autocomplete="off" placeholder="Duyuru İçeriği" id="" cols="30" rows="1"
+                  [(ngModel)]="ann.CONTENT"></textarea>
+              </mat-form-field>
+              <mat-form-field *ngIf="scope.value == 1" class="ml-3">
+                <mat-label>Hedef Departmanı Seçin</mat-label>
+                <mat-select [(value)]="ann.DEPARTMENT_ID">
+                  <mat-option *ngFor="let dep of deps" [(value)]="dep.DEPID">{{dep.DEPARTMENT_NAME}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field *ngIf="scope.value == 2" class="ml-3">
+                <mat-label>Hedef Ekibi Seçin</mat-label>
+                <mat-select [(value)]="ann.TEAM_ID">
+                  <mat-option *ngFor="let team of teams" [(value)]="team.TEAMID">{{team.TEAM_NAME}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
       <mat-card-actions class="mb-4">
-       
       </mat-card-actions>
     </mat-card-content>
   </mat-card>

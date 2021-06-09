@@ -5,3 +5,59 @@ mat-card {
     width: auto;
     height: 70vh;
 }
+mat-card-content{
+    height: 88%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: block;
+}
+mat-card.Ekipler{
+    height: max-content;
+    width: 50vw;
+}
+.spacer{
+    flex: 1 1 auto;
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 38vh;
+    overflow-x: auto;
+    overflow-y: auto;
+    .mat-table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        display: table;
+        border-collapse: collapse;
+        margin: 0px;
+    }
+    .mat-row{
+      height: 6.5vh;
+    }
+    .mat-row:hover{
+      background-color: #ebebeb;
+    };
+    .mat-header-row {
+        display: table-row;
+    }
+    .mat-cell,
+    .mat-header-cell {
+        text-align: center;
+        word-wrap: initial;
+        display: table-cell;
+        padding: 0px 5px;
+        line-break: unset;
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+    }
+  }
+
+  .mat-expansion-panel-header-title{
+    width: 205px
+}

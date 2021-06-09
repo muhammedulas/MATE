@@ -1,0 +1,99 @@
+.container {
+    width: auto;
+    height: 100%;
+    background-color: rgb(236, 232, 232);
+    padding-top: 5%;
+    text-align: center;
+    border-radius: 10px;
+}
+mat-card {
+    width: auto;
+    height: 70vh;
+}
+mat-card-content {
+    margin-top: 1%;
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    display: block;
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 38vh;
+    overflow-x: auto;
+    overflow-y: auto;
+    .mat-table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        display: table;
+        border-collapse: collapse;
+        margin: 0px;
+    }
+    .mat-row {
+        height: 6.5vh;
+    }
+    .mat-row:hover {
+        background-color: #ebebeb;
+    }
+    .mat-header-row {
+        display: table-row;
+    }
+    .mat-cell{
+        text-align: center;
+        word-wrap: initial;
+        display: table-cell;
+        padding: 0px 5px;
+        line-break: unset;
+        width: fit-content;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+    }
+    .mat-header-cell {
+        text-align: center;
+        word-wrap: initial;
+        display: table-cell;
+        padding: 0px 5px;
+        line-break: unset;
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+    }
+}
+
+
+.spacer{
+    flex: 1 1 auto;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        padding-top: 5%;
+    }
+    mat-card {
+        width: auto;
+        height: 80%;
+        overflow: hidden;
+    }
+    mat-card-content {
+        height: 100%;
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        display: block;
+    }
+
+    .mat-icon {
+        font-size: 150px;
+    }
+
+    form {
+        width: 100%;
+    }
+}

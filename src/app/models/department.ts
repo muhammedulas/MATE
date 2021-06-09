@@ -5,5 +5,5 @@ export class department {
     "COMPREF": number;
     "DEPARTMENT_NAME": string;
     "DEPARTMENT_DEF": string;
-    "TEAMS": team
+    "TEAMS"?: team
 }
