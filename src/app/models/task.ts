@@ -2,7 +2,9 @@ export class task{
     "TASKID": number;
     "TEAM_TASK": boolean;
     "ASSIGNED_TEAM"?: number;
+    "ASSIGNED_TEAM_NAME"?: string;
     "ASSIGNED_USER"?: number;
+    "ASSIGNED_USER_USERNAME"?: string;
     "CREATED_BY": string;
     "CREATED_AT": string;
     "DEADLINE": string;

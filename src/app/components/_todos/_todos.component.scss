@@ -23,15 +23,10 @@ mat-card-content {
     overflow-x: hidden;
     display: block;
 }
+
 .nested{
-    height: 95%;
-    width: 100%;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    display: block;
-}
-.nested{
-    height: 95%;
+    margin-top: 5%;
+    height: 70%;
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -71,6 +66,12 @@ mat-grid-tile{
 
 figure.matFigure{
     width: 100%;
+}
+mat-panel-description{
+    white-space: nowrap;
+    max-width: 50%;
+    width: 50%;
+    overflow: hidden;
 }
 
 

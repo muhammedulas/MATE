@@ -57,6 +57,7 @@ import { Diaog_newDepartmentComponent } from './components/admin/departments/dia
 import { Dialog_contactComponent } from './components/admin/announcements/dialog_contact/dialog_contact.component';
 import { SearchUserPipe } from './pipes/searchUser.pipe';
 import { TodoStatusPipe } from './pipes/todoStatus.pipe';
+import { TaskStatusPipe } from './pipes/taskStatus.pipe';
 
 
 
@@ -97,7 +98,8 @@ import { TodoStatusPipe } from './pipes/todoStatus.pipe';
     //Pipes
     MemberRolePipe,
     SearchUserPipe,
-    TodoStatusPipe
+    TodoStatusPipe,
+    TaskStatusPipe
     //
   ],
   imports: [

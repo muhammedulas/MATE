@@ -7,6 +7,7 @@ import { company } from '../models/company';
 import { companyAnnouncement } from '../models/companyAnnouncement';
 import { department } from '../models/department';
 import { departmentAnnouncement } from '../models/departmentAnnouncement';
+import { task } from '../models/task';
 import { team } from '../models/team';
 import { teamAnnouncement } from '../models/teamAnnouncement';
 import { tokenResponse } from '../models/tokenResponse';
@@ -22,7 +23,7 @@ export class AdminService {
   constructor(private http: HttpClient, private authSvc: AuthService) {
 
   }
-
+  //Company
   getCompanyInfo() {
     let auth = 'Bearer ' + localStorage.getItem('token')
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json').set('Content-Type', 'application/json')
@@ -37,7 +38,10 @@ export class AdminService {
     console.log(headers)
     return this.http.put<any>('https://localhost:44335/api/companies/' + comp.COMPID, body, { headers })
   }
+  //Company
 
+
+  //User
   getUsers() {
     let auth = 'Bearer ' + localStorage.getItem('token')
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
@@ -63,7 +67,9 @@ export class AdminService {
     let body = JSON.stringify(user)
     return this.http.post<any>('https://localhost:44335/api/users', body, { headers })
   }
+  //User
 
+  //Team
   getTeams() {
     let auth = 'Bearer ' + localStorage.getItem('token')
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
@@ -109,8 +115,9 @@ export class AdminService {
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
     return this.http.post<any>('https://localhost:44335/api/teams/' + tId + '/addUser(' + uId + ',' + Role + ')', '', { headers })
   }
+  //Team
 
-
+  //Department
   getDepartments() {
     let auth = 'Bearer ' + localStorage.getItem('token')
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
@@ -136,7 +143,10 @@ export class AdminService {
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
     return this.http.delete<any>('https://localhost:44335/api/departments/' + id, { headers })
   }
+  //Department
 
+
+  //Announcement
   getAllAnnouncements() {
     let announcements = new Subject<IAnnouncement[]>();
     let temp: IAnnouncement[] = [];
@@ -218,6 +228,14 @@ export class AdminService {
       return this.http.put<any>('https://localhost:44335/api/announcements/team/' + a.ANNID, { headers })
     }
   }
+  //Announcement
 
+  //Task
+
+  getAlTasks(){
+    let auth = 'Bearer ' + localStorage.getItem('token')
+    let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
+    return this.http.get<task[]>('https://localhost:44335/api/tasks', {headers})
+  }
 
 }
