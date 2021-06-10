@@ -15,7 +15,7 @@
     </mat-card-title>
     <mat-card-content>
       <mat-accordion class="mt-2">
-        <mat-expansion-panel *ngFor="let user of users; let i = index" (click)="select(user)">
+        <mat-expansion-panel *ngFor="let user of users | searchUser:searchString; let i = index" (click)="select(user)">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{user.USERNAME}}

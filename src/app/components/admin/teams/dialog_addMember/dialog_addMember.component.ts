@@ -45,8 +45,6 @@ export class Dialog_addMemberComponent implements OnInit {
           NAME: this.selectedUser.NAME,
           SURNAME: this.selectedUser.SURNAME
         }
-        
-        this.global.reRouteAdmin()
         this.toast.success_bot_center(res.message, 3)
       }
     }, err => {

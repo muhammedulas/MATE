@@ -1,3 +1,144 @@
-<p>
-  _todos works!
-</p>
+<div class="container">
+  <mat-card>
+    <mat-card-title align="center">Yapılacaklar Listem</mat-card-title>
+    <mat-card-content>
+      <mat-grid-list cols="2" rowHeight="10%">
+        <mat-grid-tile colspan="2" rowspan="1">
+
+          <div class="button">
+            <button mat-icon-button (click)="newTodoItem()" matTooltip="Ekle">
+              <mat-icon>
+                add
+              </mat-icon>
+            </button>
+          </div>
+          <div class="entry" *ngIf="newTodoMode">
+            <mat-form-field>
+              <input type="text" matInput autocomplete="off" placeholder="Başlık" #title>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field>
+              <input type="text" matInput autocomplete="off" placeholder="İçerik" #content>
+            </mat-form-field>
+            <button mat-icon-button (click)="newTodoItem()" color="primary" matTooltip="Oluştur"
+              (click)="send(content.value, title.value)">
+              <mat-icon>
+                done
+              </mat-icon>
+            </button>
+            <button mat-icon-button (click)="newTodoItem()" color="warn" matTooltip="Vazgeç"
+              (click)="newTodoMode = false">
+              <mat-icon>
+                close
+              </mat-icon>
+            </button>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="9">
+          <div class="internalMatGrid">
+            <mat-grid-list cols="1" rowHeight="10%">
+              <mat-grid-tile colspan="1" rowspan="1">
+                <h2 style="color: rgb(223, 158, 17);">Beklemede</h2>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1" rowspan="9">
+                <mat-card class="todoContainer">
+                  <mat-card-title></mat-card-title>
+                  <mat-card-content class="nested">
+                    <mat-accordion>
+                      <mat-expansion-panel *ngFor="let todo of todos|todoStatus:0 ; let i = index"  >
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            <P [(innerHTML)]="todo.TASK_TITLE"></P>
+                          </mat-panel-title>
+                          <mat-panel-description>
+                            <p [(innerHTML)]="todo.TASK_DESCRIPTION"></p>
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div class="internalMatGrid">
+                          <mat-grid-list cols="10" rowHeight="10px">
+                            <mat-grid-tile colspan="7" rowspan="7">
+                              <div class="description-l">
+                                <mat-form-field [style.width.px]="400">
+                                  <textarea name="" matInput id="" cols="30" rows="3"
+                                    [(ngModel)]="todo.TASK_DESCRIPTION"></textarea>
+                                </mat-form-field>
+                              </div>
+                            </mat-grid-tile>
+                            <mat-grid-tile colspan="1" rowspan="4">
+                              <button mat-icon-button color="primary" matTooltip="Tamamlandı"
+                                (click)="update(todo,1)">
+                                <mat-icon>
+                                  done
+                                </mat-icon>
+                              </button>
+                            </mat-grid-tile>
+                            <mat-grid-tile colspan="1" rowspan="4">
+                              <button mat-icon-button color="warn" matTooltip="Sil" (click)="update(todo,3)">
+                                <mat-icon>
+                                  close
+                                </mat-icon>
+                              </button>
+                            </mat-grid-tile>
+                            <mat-grid-tile colspan="1" rowspan="4">
+                              <button mat-icon-button matTooltip="Güncelle" (click)="update(todo)">
+                                <mat-icon>
+                                  sync_alt
+                                </mat-icon>
+                              </button>
+                            </mat-grid-tile>
+                          </mat-grid-list>
+                        </div>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="9">
+          <div class="internalMatGrid">
+            <mat-grid-list cols="1" rowHeight="10%">
+              <mat-grid-tile colspan="1" rowspan="1">
+                <h2 style="color: rgb(50, 170, 50);">Tamamlandı</h2>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1" rowspan="9">
+                <mat-card class="todoContainer">
+                  <mat-card-title></mat-card-title>
+                  <mat-card-content class="nested">
+                    <mat-accordion>
+                      <mat-expansion-panel *ngFor="let todo of todos|todoStatus:1 ; let i = index" >
+                        <mat-expansion-panel-header >
+                          <mat-panel-title>
+                            {{todo.TASK_TITLE}}
+                          </mat-panel-title>
+                          <mat-panel-description>
+                            {{todo.TASK_DESCRIPTION}}
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div class="internalMatGrid">
+                          <mat-grid-list cols="10" rowHeight="10px">
+                            <mat-grid-tile colspan="1" rowspan="4">
+                              <button mat-icon-button color="accent" matTooltip="Geri Al" (click)="update(todo,0)">
+                                <mat-icon>
+                                  remove_done
+                                </mat-icon>
+                              </button>
+                            </mat-grid-tile>
+                            <mat-grid-tile colspan="9" rowspan="7">
+                              <div class="description-r">{{todo.TASK_DESCRIPTION}}</div>
+                            </mat-grid-tile>
+                          </mat-grid-list>
+                        </div>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </mat-card-content>
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+</div>

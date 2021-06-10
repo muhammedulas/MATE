@@ -1,0 +1,13 @@
+<div class="container">
+  <h1 mat-dialog-title>{{data.USERNAME}} Kullanıcısının İletişim Bilgileri</h1>
+  <div mat-dialog-content>
+    <p>
+      <span>E-Posta: {{data.CONTACT_INFO.MAIL}}</span>
+      <br>
+      <span>Telefon: {{data.CONTACT_INFO.PHONE}}</span>
+    </p>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-stroked-button [mat-dialog-close] cdkFocukInitial>Tamam</button>
+  </div>
+</div>

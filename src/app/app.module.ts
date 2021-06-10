@@ -24,7 +24,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 
 
-
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { MainComponent } from './components/shared/main/main.component';
 import { SidenavComponent } from './components/shared/sidenav/sidenav.component';
@@ -55,6 +54,9 @@ import { Dialog_confirmationComponent } from './components/commonDialogs/dialog_
 import { Dialog_newUserComponent } from './components/admin/users/dialog_newUser/dialog_newUser.component';
 import { Dialog_passwordComponent } from './components/admin/users/dialog_password/dialog_password.component';
 import { Diaog_newDepartmentComponent } from './components/admin/departments/diaog_newDepartment/diaog_newDepartment.component';
+import { Dialog_contactComponent } from './components/admin/announcements/dialog_contact/dialog_contact.component';
+import { SearchUserPipe } from './pipes/searchUser.pipe';
+import { TodoStatusPipe } from './pipes/todoStatus.pipe';
 
 
 
@@ -91,8 +93,11 @@ import { Diaog_newDepartmentComponent } from './components/admin/departments/dia
     Dialog_newUserComponent,
     Dialog_passwordComponent,
     Diaog_newDepartmentComponent,
+    Dialog_contactComponent,
     //Pipes
-    MemberRolePipe
+    MemberRolePipe,
+    SearchUserPipe,
+    TodoStatusPipe
     //
   ],
   imports: [
@@ -139,7 +144,8 @@ import { Diaog_newDepartmentComponent } from './components/admin/departments/dia
     Dialog_addTeamComponent, 
     Dialog_confirmationComponent, 
     Dialog_newUserComponent,
-    Dialog_passwordComponent
+    Dialog_passwordComponent,
+    Dialog_contactComponent
   ],
     
   bootstrap: [AppComponent]

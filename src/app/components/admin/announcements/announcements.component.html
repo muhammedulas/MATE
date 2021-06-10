@@ -53,7 +53,8 @@
                   <mat-option value=1>Departmanlar</mat-option>
                   <mat-option value=2>Ekipler</mat-option>
                 </mat-select>
-                <mat-hint align="end">Duyuruyu Kimlerin Göreceğini Seç</mat-hint>
+                <mat-hint align="end" *ngIf="ann.isNew">Duyuruyu Kimlerin Göreceğini Seç</mat-hint>
+                <mat-hint align="end" *ngIf="!ann.isNew">Hedef Kitle Sonradan Değiştirilemez</mat-hint>
               </mat-form-field>
             </div>
             <div class="col-md-1 offset-md-2">

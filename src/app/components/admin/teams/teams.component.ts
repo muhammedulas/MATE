@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -28,7 +28,7 @@ export class TeamsComponent implements OnInit {
   public displayedColumns = ["username", "name", "surname", "role"];
   public selectedMember: teamMember = new teamMember();
   public memberIndex: number;
-  public memberDialogRef;
+  public memberDialogRef:MatDialogRef<Dialog_addMemberComponent>;
   public teamDialogRef;
 
   constructor(
@@ -108,6 +108,9 @@ export class TeamsComponent implements OnInit {
     this.memberDialogRef = this.dialog.open(Dialog_addMemberComponent, {
       width: '50vw',
       data: tInfo
+    });
+    this.memberDialogRef.afterClosed().subscribe(d=>{
+      this.getTeams();
     })
   }
 

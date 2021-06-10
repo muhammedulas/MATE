@@ -43,7 +43,7 @@ mat-card-content {
     .mat-header-row {
         display: table-row;
     }
-    .mat-cell{
+    .mat-cell {
         text-align: center;
         word-wrap: initial;
         display: table-cell;
@@ -65,10 +65,25 @@ mat-card-content {
         overflow: hidden;
         vertical-align: middle;
     }
+    .mat-column-actions {
+        width: 5%;
+        max-width: 5%;
+        max-height: 6.5vh;
+
+    }
+    .mat-column-pointer {
+        width: 5%;
+        max-width: 5%;
+    }
 }
 
+.content{
+    background-color: white;
+    max-width: 10vw;
+    max-height: 10vh;
+}
 
-.spacer{
+.spacer {
     flex: 1 1 auto;
 }
 
@@ -87,10 +102,6 @@ mat-card-content {
         overflow-y: auto;
         overflow-x: hidden;
         display: block;
-    }
-
-    .mat-icon {
-        font-size: 150px;
     }
 
     form {

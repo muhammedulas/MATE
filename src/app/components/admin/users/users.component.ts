@@ -16,6 +16,7 @@ import { Dialog_passwordComponent } from './dialog_password/dialog_password.comp
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  public searchString: string = '';
   public users: user[] = [];
   public selected: number = 0;
   public temp: user = new user();
@@ -78,7 +79,7 @@ export class UsersComponent implements OnInit {
       description: user.USERNAME + ' kullanıcısı silinecektir. Onaylıyor musunuz?',
       action: 'delete',
       id: user.USERID,
-      actionButtonColor:'warn'
+      actionButtonColor: 'warn'
     }
     this.deleteDialogRef = this.dialog.open(Dialog_confirmationComponent, {
       data: dialogData
