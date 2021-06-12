@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { announcement_general } from '../models/announcement_general';
+import { chartData } from '../models/chartData';
 import { company } from '../models/company';
 import { task } from '../models/task';
 import { team } from '../models/team';
@@ -108,6 +109,12 @@ export class GeneralService {
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json').set('Content-Type', 'application/json')
     let body = JSON.stringify(task)
     return this.http.put<any>('https://localhost:44335/api/tasks/' + task.TASKID, body, { headers })
+  }
+
+  getChartDatas() {
+    let auth = 'Bearer ' + this.session.access_token;
+    let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
+    return this.http.get<chartData[]>('https://localhost:44335/api/chartData/' + this.session.userId, {headers})
   }
 
 }

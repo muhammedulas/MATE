@@ -15,16 +15,18 @@ export class AuthGuard implements CanActivate {
     private router: Router,
     private auth:AuthService
   ) {
-    this.session = JSON.parse(localStorage.getItem('session'))
+    this.auth.observeSessionInfo().subscribe(s=>{
+      this.session = s
+    })
   }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.session || (Date.parse(this.date.toString()) < Date.parse(this.session['.expires']))) {
+    if (this.auth.isLoggedIn || (Date.parse(this.date.toString()) < Date.parse(this.session['.expires']))) {
       if (route.routeConfig.path == 'admin') {
-        if (this.session.isAdmin == 'true') return true
+        if (this.auth.isAdmin) return true
         else {
-          this.auth.logout()
+          this.router.navigate(['/login'])
           return false
         }
       }
@@ -32,6 +34,7 @@ export class AuthGuard implements CanActivate {
     }
     else {
       this.auth.logout()
+      this.router.navigate(['/login'])
       return false
     }
   }

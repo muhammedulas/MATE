@@ -2,20 +2,48 @@
   <mat-card>
     <mat-card-title align="center">Panel</mat-card-title>
     <mat-card-content>
-      <mat-grid-list cols="4" rowHeight="25%">
-        <mat-grid-tile colspan="1" style="background-color: white;">
-          test  
+      <mat-grid-list cols="3" rowHeight="45%" [gutterSize]="'2%'" style="width: 99%;">
+        <mat-grid-tile colspan="1" rowspan="2" class="mat-elevation-z8" >
+          <div>
+            <h3>Durumlarına Göre Görevler</h3>
+            <apx-chart
+              [series]="tasksByStatus.series"
+              [chart]="tasksByStatus.chart"
+              [labels]="tasksByStatus.labels"
+              [responsive]="tasksByStatus.responsive"
+              [colors]="['#feb019','#1899fc', '#480a92']"
+            ></apx-chart>
+          </div>
         </mat-grid-tile>
-        <mat-grid-tile colspan="1" style="background-color: white;">
-          test
+        <mat-grid-tile colspan="1" rowspan="2" class="mat-elevation-z8" >
+          <div class="tasksByResultChart">
+            <h3>Sonuçlanan Görevler</h3>
+            <apx-chart
+              [series]="tasksByResults.series"
+              [chart]="tasksByResults.chart"
+              [labels]="tasksByResults.labels"
+              [responsive]="tasksByResults.responsive"
+            ></apx-chart>
+          </div>
         </mat-grid-tile>
-        <mat-grid-tile colspan="1" style="background-color: white;">
-          test  
+        <mat-grid-tile colspan="1" rowspan="1" class="mat-elevation-z8" >
+          <div class="todosChart">
+            <h3>Yapılacaklar Listesi</h3>
+            <apx-chart
+              [series]="todos.series"
+              [chart]="todos.chart"
+              [labels]="todos.labels"
+              [responsive]="todos.responsive"
+            ></apx-chart>
+          </div>
         </mat-grid-tile>
-        <mat-grid-tile colspan="1" style="background-color: white;">
-          test  
+        <mat-grid-tile colspan="1" rowspan="1" class="mat-elevation-z8"  >
+          <div class="nested">
+              <h3 style="text-align: center; margin-top: 15%;">Başarı Oranınız</h3>
+              <br>
+              <p [style.width.%]="80" class="nested-content"><ngb-progressbar type="success" [value]="taskSuccessRate" >%{{taskSuccessRate}}</ngb-progressbar></p>
+          </div>
         </mat-grid-tile>
-        
       </mat-grid-list>
     </mat-card-content>
   </mat-card>

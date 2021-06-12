@@ -24,6 +24,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -142,7 +143,8 @@ import { Dialog_statusCommentComponent } from './components/commonDialogs/dialog
     MatMenuModule,
     MatSortModule,
     //
-    NgbModule
+    NgbModule,
+    NgApexchartsModule
 
   ],
   providers: [MainComponent, 

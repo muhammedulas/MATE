@@ -44,7 +44,7 @@ export class AuthService {
         localStorage.setItem('session', JSON.stringify(res))
         localStorage.setItem('token', res.access_token)
         this.sessionInfo.next(res)
-        this.router.navigate(['/'])
+        this.router.navigate(['/dashboard'])
       }
     }, err => {
       console.log(err)
@@ -58,9 +58,11 @@ export class AuthService {
   logout() {
     localStorage.removeItem('session');
     localStorage.removeItem('token');
+    localStorage.clear();
     this.isLoggedIn = false;
     this.isAdmin = false;
     this.router.navigate(['/login'])
+
   }
 
   observeSessionInfo() {

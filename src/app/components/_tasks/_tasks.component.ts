@@ -19,7 +19,7 @@ import { Dialog_taskComponent } from '../commonDialogs/dialog_task/dialog_task.c
 })
 export class _tasksComponent implements OnInit {
   private session: tokenResponse = new tokenResponse();
-  public shownTasks = 0;
+  public shownTasks = 1;
   private selectedTask: task = new task();
   public myTasks: task[] = [];
   public tasksCreatedByMe: task[] = [];
