@@ -1,0 +1,122 @@
+<div class="wrapper">
+  <h2 mat-dialog-title>Başlık</h2>
+  <mat-dialog-content>
+    <div class="container">
+      <div class="grid-1">
+        <h4>Görev Detayları</h4>
+        <mat-form-field [style.width.%]="70">
+          <input type="text" matInput autocomplete="off" placeholder="Görev Başlığı" [(ngModel)]="data.TASK_TITLE"
+            [disabled]="data.inspectMode">
+        </mat-form-field>
+        <mat-form-field [style.width.%]="100">
+          <textarea matInput autocomplete="off" placeholder="Görev Detayı" cols="30" rows="3"
+            [(ngModel)]="data.TASK_DESCRIPTION" [disabled]="data.inspectMode"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="grid-2">
+        <h4>Atama Bilgileri</h4>
+        <div class="grid-content">
+          <mat-form-field [style.width.%]="70">
+            <mat-select matInput placeholder="Oluşturan" [disabled]="data.inspectMode || data.fromTeamsSection"
+              [(ngModel)]="data.CREATED_BY" name="createdBy" [(ngModel)]="data.CREATED_BY" [(value)]="data.CREATED_BY">
+              <mat-option *ngFor="let user of users" [value]="user.USERNAME">
+                {{user.USERNAME}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field [style.width.%]="70">
+            <mat-select matInput placeholder="Hedef" [(ngModel)]="data.TEAM_TASK" name="scope"
+              [disabled]="data.inspectMode || data.fromTeamsSection">
+              <mat-option [value]="true">Ekibe Yönelik</mat-option>
+              <mat-option [value]="false">Kişiye Yönelik</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field [style.width.%]="70" *ngIf="data.TEAM_TASK == false">
+            <mat-select matInput placeholder="Atanan" [(ngModel)]="data.ASSIGNED_USER" name="assUser"
+              [disabled]="data.inspectMode || data.fromTeamsSection">
+              <mat-option *ngFor="let user of users" [value]="user.USERID">
+                {{user.USERNAME}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field [style.width.%]="70" *ngIf="data.TEAM_TASK == true">
+            <mat-select matInput placeholder="Atanan" [(ngModel)]="data.ASSIGNED_TEAM" name="assTeam"
+              (onSelectionChange)="setScope()" [disabled]="data.inspectMode">
+              <mat-option *ngFor="let team of teams" [value]="team.TEAMID">
+                {{team.TEAM_NAME}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="grid-3">
+        <h4>Durum Bilgileri</h4>
+        <mat-form-field [style.width.%]="70">
+          <mat-select matInput placeholder="Durumu" [(ngModel)]="data.STATUS" name="status" #status
+            (selectionChange)="onStatusChange()" [disabled]="data.inspectMode">
+            <mat-option [value]="0">Beklemede</mat-option>
+            <mat-option [value]="1">Devam Ediyor</mat-option>
+            <mat-option [value]="2">Tamamlandı</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field [style.width.%]="70">
+          <mat-select matInput placeholder="Sonuç" [(ngModel)]="data.RESULT" #result
+            [disabled]="data.inspectMode || data.STATUS != 2">
+            <mat-option [value]="1">Başarılı</mat-option>
+            <mat-option [value]="2">Başarısız</mat-option>
+            <mat-option [value]="3">İptal</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field [style.width.%]="100">
+          <textarea matInput autocomplete="off" placeholder="Durum Açıklaması" cols="30" rows="1"
+            [(ngModel)]="data.STATUS_COMMENT" [disabled]="data.inspectMode"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="grid-4">
+        <h4></h4>
+        <div class="grid-content">
+          <h4>&nbsp;</h4>
+          <mat-form-field [style.width.%]="40">
+            <mat-label>Oluşturma Tarihi</mat-label>
+            <input matInput [matDatepicker]="createDatePicker" [(ngModel)]="data.CREATED_AT"
+              [disabled]="data.inspectMode || data.fromTeamsSection">
+            <mat-datepicker-toggle matSuffix [for]="createDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #createDatePicker [startAt]="date"></mat-datepicker>
+          </mat-form-field>
+          &nbsp;
+          <mat-form-field [style.width.%]="40">
+            <mat-label>İstenen Tarih</mat-label>
+            <input matInput [matDatepicker]="deadlineDatePicker" [(ngModel)]="data.DEADLINE"
+              [disabled]="data.inspectMode">
+            <mat-datepicker-toggle matSuffix [for]="deadlineDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #deadlineDatePicker></mat-datepicker>
+          </mat-form-field>
+          <br>
+          <br>
+          <br>
+          <br>
+          <h4></h4>
+          <div *ngIf="data.MODIFIED_BY">
+            <mat-form-field [style.width.%]="40">
+              <mat-label>Son Değiştiren</mat-label>
+              <input matInput [(ngModel)]="data.MODIFIED_BY" disabled>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field [style.width.%]="40">
+              <mat-label>Son Değişiklik Tarihi</mat-label>
+              <input matInput [matDatepicker]="lastModifiedDatePicker" [(ngModel)]="data.MODIFIED_AT" disabled>
+              <mat-datepicker-toggle matSuffix [for]="lastModifiedDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #lastModifiedDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <div class="spacer"></div>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close] *ngIf="!data.inspectMode">Vazgeç</button>
+    <button mat-button (click)="create()" [mat-dialog-close] *ngIf="!data.inspectMode && data.newTask== true"
+      cdkFocusInitial>Oluştur</button>
+    <button mat-button [mat-dialog-close] cdkFocusInitial *ngIf="data.inspectMode && !data.newTask">Tamam</button>
+    <button mat-button [mat-dialog-close] cdkFocusInitial *ngIf="!data.inspectMode && !data.newTask">Güncelle</button>
+  </mat-dialog-actions>
+</div>

@@ -38,7 +38,6 @@ export class _todosComponent implements OnInit {
       if (res.OK == true) {
         this.getTodos()
       }
-      console.log(res)
     }, err => {
       console.log(err)
     })
@@ -58,7 +57,6 @@ export class _todosComponent implements OnInit {
   getTodos() {
     this.svc.getTodos().subscribe(res => {
       this.todos = res
-      console.log(res)
     }, err => {
       console.log(err)
     })
@@ -68,7 +66,6 @@ export class _todosComponent implements OnInit {
     let temp = todo;
     temp.STATUS = status
     this.svc.updateTodo(temp).subscribe(res => {
-      console.log(res)
       this.getTodos()
     }, err => {
       console.log(err)

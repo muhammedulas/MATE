@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ITask } from '../app.component';
 import { IAnnouncement } from '../components/admin/announcements/announcements.component';
 import { announcement_general } from '../models/announcement_general';
 import { company } from '../models/company';
@@ -13,6 +14,7 @@ import { teamAnnouncement } from '../models/teamAnnouncement';
 import { tokenResponse } from '../models/tokenResponse';
 import { user } from '../models/user';
 import { AuthService } from './auth.service';
+import { GlobalService } from './global.service';
 
 
 @Injectable({
@@ -20,8 +22,7 @@ import { AuthService } from './auth.service';
 })
 export class AdminService {
   private session = new tokenResponse();
-  constructor(private http: HttpClient, private authSvc: AuthService) {
-
+  constructor(private http: HttpClient, private authSvc: AuthService, private global: GlobalService) {
   }
   //Company
   getCompanyInfo() {
@@ -214,7 +215,7 @@ export class AdminService {
   }
 
 
-  updateAnnouncement(a:IAnnouncement){
+  updateAnnouncement(a: IAnnouncement) {
     let auth = 'Bearer ' + localStorage.getItem('token')
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
     let body = JSON.stringify(a)
@@ -232,10 +233,52 @@ export class AdminService {
 
   //Task
 
-  getAlTasks(){
+  getAlTasks() {
     let auth = 'Bearer ' + localStorage.getItem('token')
     let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
-    return this.http.get<task[]>('https://localhost:44335/api/tasks', {headers})
+    return this.http.get<task[]>('https://localhost:44335/api/tasks', { headers })
+  }
+
+  updateTask(task: task) {
+    task.MODIFIED_BY = this.authSvc.userName
+    task.MODIFIED_AT = this.global.getLocalTime();
+    let auth = 'Bearer ' + localStorage.getItem('token')
+    let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json').set('Content-Type', 'application/json')
+    let body = JSON.stringify(task)
+    return this.http.put<any>('https://localhost:44335/api/tasks/' + task.TASKID, body, { headers })
+  }
+
+  createTask(task: ITask) {
+    console.log(task)
+    let temp: task
+    delete task.inspectMode
+    delete task.newTask
+    temp = {
+      TASKID: task.TASKID,
+      TEAM_TASK: task.TEAM_TASK,
+      ASSIGNED_USER: task.ASSIGNED_USER,
+      CREATED_BY: task.CREATED_BY,
+      CREATED_AT: task.CREATED_AT.toISOString(),
+      DEADLINE: task.DEADLINE.toISOString(),
+      TASK_TITLE: task.TASK_TITLE,
+      TASK_DESCRIPTION: task.TASK_DESCRIPTION,
+      STATUS: task.STATUS,
+      STATUS_COMMENT: task.STATUS_COMMENT,
+      RESULT: task.RESULT,
+    }
+    if (task.CLOSED_AT) {
+      temp.CLOSED_AT = task.CLOSED_AT.toISOString()
+    }
+    let auth = 'Bearer ' + localStorage.getItem('token')
+    let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json').set('Content-Type', 'application/json')
+    let body = JSON.stringify(temp)
+    return this.http.post<any>('https://localhost:44335/api/tasks', body, { headers })
+  }
+
+  deleteTask(taskId) {
+    let auth = 'Bearer ' + localStorage.getItem('token')
+    let headers = new HttpHeaders().set('Authorization', auth).set('Accept', 'application/json')
+    return this.http.delete<any>('https://localhost:44335/api/tasks/' + taskId, { headers })
   }
 
 }

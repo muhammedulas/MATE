@@ -3,22 +3,11 @@
     <div class="container">
         <router-outlet></router-outlet>
 
-
-
-        <!-- Sidenav         -->
         <div *ngIf="sideNavActive" class="sidenav mat-elevation-z8" cdkDragBoundary=".wrapper" cdkDrag>
             <button mat-icon-button class="sidenav-close-button" matTooltip="Gizle" matTooltipPosition="above"
                 (click)="toggleSideNav()">
                 <mat-icon>close</mat-icon>
             </button>
-            <!--         <div class="sidenav-drag-handle" cdkDragHandle>
-            <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                    d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z">
-                </path>
-                <path d="M0 0h24v24H0z" fill="none"></path>
-            </svg>
-        </div> -->
             <mat-nav-list>
                 <button mat-icon-button class="sideNavItem" matTooltip="Panel" matTooltipPosition="left"
                     routerLink="/dashboard">
@@ -26,16 +15,16 @@
                         leaderboard
                     </mat-icon>
                 </button>
-                <button mat-icon-button class="sideNavItem" matTooltip="Yapılacaklar Listem" matTooltipPosition="left"
-                    routerLink="/todos">
+                <button mat-icon-button class="sideNavItem" matTooltip="Görevlerim" matTooltipPosition="left"
+                    routerLink="/tasks">
                     <mat-icon>
                         checklist
                     </mat-icon>
                 </button>
-                <button mat-icon-button class="sideNavItem" matTooltip="Görevlerim" matTooltipPosition="left"
-                    routerLink="/tasks">
+                <button mat-icon-button class="sideNavItem" matTooltip="Yapılacaklar Listem" matTooltipPosition="left"
+                    routerLink="/todos">
                     <mat-icon>
-                        task
+                        format_list_bulleted
                     </mat-icon>
                 </button>
                 <button mat-icon-button class="sideNavItem" matTooltip="Ekipler" matTooltipPosition="left"

@@ -3,12 +3,15 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ITask } from 'src/app/app.component';
 import { team } from 'src/app/models/team';
 import { teamMember } from 'src/app/models/teamMember';
 import { user } from 'src/app/models/user';
 import { AdminService } from 'src/app/services/admin.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { Dialog_taskComponent } from '../../commonDialogs/dialog_task/dialog_task.component';
 import { AdminComponent } from '../admin.component';
 import { Dialog_addMemberComponent } from './dialog_addMember/dialog_addMember.component';
 import { Dialog_addTeamComponent } from './dialog_addTeam/dialog_addTeam.component';
@@ -24,20 +27,22 @@ export interface idIndex {
 })
 export class TeamsComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion
+  public date = new Date();
   public teams: team[] = []
   public displayedColumns = ["username", "name", "surname", "role"];
   public selectedMember: teamMember = new teamMember();
   public memberIndex: number;
-  public memberDialogRef:MatDialogRef<Dialog_addMemberComponent>;
+  public memberDialogRef: MatDialogRef<Dialog_addMemberComponent>;
   public teamDialogRef;
 
   constructor(
     private svc: AdminService,
     private toast: ToastService,
     private dialog: MatDialog,
+    private auth: AuthService,
     private changeDetectorRefs: ChangeDetectorRef,
     private router: Router,
-    private global:GlobalService
+    private global: GlobalService
 
   ) { }
 
@@ -109,8 +114,10 @@ export class TeamsComponent implements OnInit {
       width: '50vw',
       data: tInfo
     });
-    this.memberDialogRef.afterClosed().subscribe(d=>{
-      this.getTeams();
+    this.memberDialogRef.afterClosed().subscribe(d => {
+      this.svc.getTeam(this.teams[i].TEAMID).subscribe(res => {
+        this.teams[i].MEMBERS = res.MEMBERS;
+      })
     })
   }
 

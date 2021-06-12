@@ -50,4 +50,11 @@ export class ToastService {
     else this.toastr.success(msg, '', { positionClass: 'toast-bottom-center', timeOut: (timeout * 1000) })
   }
 
+  show_top_center(msg: string, timeout: number, title?: string){
+    if (title) {
+      this.toastr.show(msg, title, { positionClass: 'toast-top-center', timeOut: (timeout * 1000) })
+    }
+    else this.toastr.show(msg, '', { positionClass: 'toast-top-center', timeOut: (timeout * 1000) })
+  }
+
 }

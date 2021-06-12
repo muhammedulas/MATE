@@ -45,7 +45,7 @@
                   <mat-card-title></mat-card-title>
                   <mat-card-content class="nested">
                     <mat-accordion>
-                      <mat-expansion-panel *ngFor="let todo of todos|todoStatus:0 ; let i = index"  >
+                      <mat-expansion-panel *ngFor="let todo of todos|todoStatus:0 ; let i = index">
                         <mat-expansion-panel-header>
                           <mat-panel-title>
                             <P [(innerHTML)]="todo.TASK_TITLE"></P>
@@ -59,14 +59,13 @@
                             <mat-grid-tile colspan="7" rowspan="7">
                               <div class="description-l">
                                 <mat-form-field [style.width.px]="400">
-                                  <textarea name="" matInput id="" cols="30" rows="3"
+                                  <textarea name="" matInput id="" cols="15" rows="3" style="white-space:pre-line;"
                                     [(ngModel)]="todo.TASK_DESCRIPTION"></textarea>
                                 </mat-form-field>
                               </div>
                             </mat-grid-tile>
                             <mat-grid-tile colspan="1" rowspan="4">
-                              <button mat-icon-button color="primary" matTooltip="Tamamlandı"
-                                (click)="update(todo,1)">
+                              <button mat-icon-button color="primary" matTooltip="Tamamlandı" (click)="update(todo,1)">
                                 <mat-icon>
                                   done
                                 </mat-icon>
@@ -107,8 +106,8 @@
                   <mat-card-title></mat-card-title>
                   <mat-card-content class="nested">
                     <mat-accordion>
-                      <mat-expansion-panel *ngFor="let todo of todos|todoStatus:1 ; let i = index" >
-                        <mat-expansion-panel-header >
+                      <mat-expansion-panel *ngFor="let todo of todos|todoStatus:1 ; let i = index">
+                        <mat-expansion-panel-header>
                           <mat-panel-title>
                             {{todo.TASK_TITLE}}
                           </mat-panel-title>

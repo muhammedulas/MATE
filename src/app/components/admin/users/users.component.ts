@@ -46,7 +46,6 @@ export class UsersComponent implements OnInit {
     if (this.selected != record.USERID) {
       this.selected = record.USERID
       this.temp = new user();
-      console.log(JSON.stringify(record))
       this.temp = {
         USERID: record.USERID,
         USERNAME: record.USERNAME,
@@ -63,7 +62,6 @@ export class UsersComponent implements OnInit {
   update(u) {
     this.svc.updateUser(u).subscribe(res => {
       if (res.OK == true) {
-        console.log(res)
         this.toast.success_bot_center(res.message, 3)
       }
       else {
@@ -77,7 +75,7 @@ export class UsersComponent implements OnInit {
       title: 'Silme İşlemini Onayla',
       themeColor: 'warn',
       description: user.USERNAME + ' kullanıcısı silinecektir. Onaylıyor musunuz?',
-      action: 'delete',
+      action: 'deleteUser',
       id: user.USERID,
       actionButtonColor: 'warn'
     }

@@ -23,7 +23,7 @@ export class MainComponent implements OnInit {
   public announcements = [];
 
   constructor(private auth: AuthService, private general: GeneralService, private toast: ToastService) {
-    
+
   }
 
   ngOnInit() {
@@ -58,7 +58,7 @@ export class MainComponent implements OnInit {
   }
 
   test(c) {
-    this.toast.success_top_center(c, 3)
+    this.toast.show_top_center(c, 3)
   }
 
 

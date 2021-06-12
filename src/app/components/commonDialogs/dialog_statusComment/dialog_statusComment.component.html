@@ -1,0 +1,9 @@
+<h1 mat-dialog-title >Durum Açıklaması</h1>
+<div mat-dialog-content >
+  <mat-form-field [style.width.%]="100">
+    <textarea name="" id="" cols="75"  matInput rows="10" [(ngModel)]="data.STATUS_COMMENT"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-button [mat-dialog-close]  cdkFocusInitial (click)="action()">Tamam</button>
+</div>

@@ -21,7 +21,7 @@ mat-card-content {
     margin-top: 1%;
     height: 90%;
     width: 100%;
-    overflow-y: hidden;
+    overflow-y: auto;
     overflow-x: hidden;
     display: block;
 }
@@ -30,7 +30,7 @@ mat-card-content {
     display: block;
     width: 100%;
     height: auto;
-    max-height: 100%;
+    max-height: 95%;
     overflow-x: auto;
     overflow-y: auto;
     .mat-table {
@@ -103,6 +103,10 @@ mat-card-content {
 
 .spacer{
     flex: 1 1 auto;
+}
+
+.active{
+    background-color: #ebebeb;
 }
 
 @media screen and (max-width: 600px) {

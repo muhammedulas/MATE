@@ -19,6 +19,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSortModule } from '@angular/material/sort';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -58,6 +60,9 @@ import { Dialog_contactComponent } from './components/admin/announcements/dialog
 import { SearchUserPipe } from './pipes/searchUser.pipe';
 import { TodoStatusPipe } from './pipes/todoStatus.pipe';
 import { TaskStatusPipe } from './pipes/taskStatus.pipe';
+import { Dialog_taskComponent } from './components/commonDialogs/dialog_task/dialog_task.component';
+import { TaskOwnerPipe } from './pipes/taskOwner.pipe';
+import { Dialog_statusCommentComponent } from './components/commonDialogs/dialog_statusComment/dialog_statusComment.component';
 
 
 
@@ -95,11 +100,14 @@ import { TaskStatusPipe } from './pipes/taskStatus.pipe';
     Dialog_passwordComponent,
     Diaog_newDepartmentComponent,
     Dialog_contactComponent,
+    Dialog_taskComponent,
+    Dialog_statusCommentComponent,
     //Pipes
     MemberRolePipe,
     SearchUserPipe,
     TodoStatusPipe,
-    TaskStatusPipe
+    TaskStatusPipe,
+    TaskOwnerPipe
     //
   ],
   imports: [
@@ -131,6 +139,8 @@ import { TaskStatusPipe } from './pipes/taskStatus.pipe';
     MatAutocompleteModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatMenuModule,
+    MatSortModule,
     //
     NgbModule
 
@@ -138,7 +148,8 @@ import { TaskStatusPipe } from './pipes/taskStatus.pipe';
   providers: [MainComponent, 
     AuthService, TeamsComponent, 
     AdminComponent, 
-    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    TaskOwnerPipe
   ],
   
   entryComponents: [
@@ -147,7 +158,9 @@ import { TaskStatusPipe } from './pipes/taskStatus.pipe';
     Dialog_confirmationComponent, 
     Dialog_newUserComponent,
     Dialog_passwordComponent,
-    Dialog_contactComponent
+    Dialog_contactComponent,
+    Dialog_taskComponent,
+    Dialog_statusCommentComponent
   ],
     
   bootstrap: [AppComponent]

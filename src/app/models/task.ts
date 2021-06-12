@@ -9,11 +9,11 @@ export class task{
     "CREATED_AT": string;
     "DEADLINE": string;
     "MODIFIED_BY"?: string;
-    "MODIFIED_AT"?: Date;
+    "MODIFIED_AT"?: string;
     "TASK_TITLE": string;
     "TASK_DESCRIPTION": string;
     "STATUS": number;
     "STATUS_COMMENT"?: string;
     "RESULT"?: number;
-    "CLOSED_AT"?: Date
+    "CLOSED_AT"?: string
 }

@@ -28,7 +28,7 @@ export class Dialog_confirmationComponent implements OnInit {
         this.global.reRouteAdmin()
         this.toast.success_bot_center(res, 3)
       }, err => {
-        this.toast.error_bot_center(err.message, 3)
+        this.toast.error_bot_center(err.error.Message, 3)
       })
     }
 
@@ -50,6 +50,15 @@ export class Dialog_confirmationComponent implements OnInit {
         this.toast.error_bot_center(err.error.Message, 3, 'Ekip Silinemedi')
       })
     }
+
+    if (this.data.action === 'deleteTask') {
+      this.svc.deleteTask(this.data.id).subscribe(res => {
+        this.toast.success_bot_center(res.message, 3)
+      }, err => {
+        this.toast.error_bot_center(err, 3)
+      })
+    }
+
   }
 
 }

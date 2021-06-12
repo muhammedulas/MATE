@@ -9,9 +9,11 @@ import { ToastService } from './toast.service';
   providedIn: 'root'
 })
 export class AuthService {
+  public session:tokenResponse = new tokenResponse();
   public isLoggedIn: boolean = false;
   public isAdmin: boolean = false;
   public userId: number = 0;
+  public userName: string = "";
   public sessionInfo = new Subject<tokenResponse>();
   constructor(
     private http: HttpClient,
@@ -19,12 +21,14 @@ export class AuthService {
     private router: Router
 
   ) {
+    this.session = JSON.parse(localStorage.getItem('session'))
     localStorage.setItem('rootUrl', 'https://localhost:44335');
     this.observeSessionInfo().subscribe(session => {
-      if(session){
+      if (session) {
         if (session.isAdmin == 'true') {
           this.isAdmin = true
           this.userId = parseInt(session.userId)
+          this.userName = session.userName;
         }
       }
     })
