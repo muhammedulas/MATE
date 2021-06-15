@@ -9,5 +9,4 @@ export class contactInfo {
     "POSTAL_CODE": string;
     "OPEN_ADRESS": string;
     "PROFILE_PHOTO": string;
-
 }

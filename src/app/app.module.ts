@@ -56,7 +56,6 @@ import { Dialog_addTeamComponent } from './components/admin/teams/dialog_addTeam
 import { Dialog_confirmationComponent } from './components/commonDialogs/dialog_confirmation/dialog_confirmation.component';
 import { Dialog_newUserComponent } from './components/admin/users/dialog_newUser/dialog_newUser.component';
 import { Dialog_passwordComponent } from './components/admin/users/dialog_password/dialog_password.component';
-import { Diaog_newDepartmentComponent } from './components/admin/departments/diaog_newDepartment/diaog_newDepartment.component';
 import { Dialog_contactComponent } from './components/admin/announcements/dialog_contact/dialog_contact.component';
 import { SearchUserPipe } from './pipes/searchUser.pipe';
 import { TodoStatusPipe } from './pipes/todoStatus.pipe';
@@ -99,7 +98,6 @@ import { Dialog_statusCommentComponent } from './components/commonDialogs/dialog
     Dialog_confirmationComponent,
     Dialog_newUserComponent,
     Dialog_passwordComponent,
-    Diaog_newDepartmentComponent,
     Dialog_contactComponent,
     Dialog_taskComponent,
     Dialog_statusCommentComponent,

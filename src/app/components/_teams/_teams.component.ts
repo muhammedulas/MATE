@@ -89,9 +89,5 @@ export class _teamsComponent implements OnInit {
       height: "81vh",
       data: data
     })
-
   }
-
-
-
 }

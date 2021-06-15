@@ -9,8 +9,5 @@ export class TodoStatusPipe implements PipeTransform {
   transform(value: todo[], args: number): todo[] {
 
       return value.filter(q=> q.STATUS == args)
-    
-
   }
-
 }
